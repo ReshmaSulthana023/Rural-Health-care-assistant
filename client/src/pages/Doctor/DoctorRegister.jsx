@@ -52,9 +52,23 @@ function DoctorRegister() {
         image: "",
       });
     } catch (error) {
-      console.error(error);
-      alert("Registration Failed");
-    }
+  console.error("FULL ERROR:", error);
+
+  if (error.response) {
+    console.log("STATUS:", error.response.status);
+    console.log("DATA:", error.response.data);
+
+    alert(
+      error.response.data.message || "Server returned an error"
+    );
+  } else if (error.request) {
+    console.log("REQUEST:", error.request);
+    alert("Backend server is not reachable");
+  } else {
+    console.log("ERROR:", error.message);
+    alert(error.message);
+  }
+}
   };
 
   return (
