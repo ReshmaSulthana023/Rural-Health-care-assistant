@@ -1,0 +1,45 @@
+.availability-page {
+  min-height: 100vh;
+  padding: 50px 20px;
+  background: #f5f8fc;
+}
+
+.availability-card {
+  max-width: 900px;
+  margin: auto;
+  background: white;
+  padding: 35px;
+  border-radius: 18px;
+  box-shadow:
+    0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+.availability-row {
+  display: grid;
+  grid-template-columns:
+    1fr 1fr 1fr auto;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.availability-row select,
+.availability-row input {
+  padding: 12px;
+  border: 1px solid #d5dbe5;
+  border-radius: 8px;
+}
+
+.remove-button {
+  border: none;
+  background: #fee2e2;
+  color: #dc2626;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.availability-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 25px;
+}

@@ -1,0 +1,149 @@
+.doctor-appointments-page {
+  min-height: 100vh;
+  background: #f5f8fc;
+  padding: 40px 20px;
+}
+
+.doctor-appointments-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.doctor-appointments-header {
+  margin-bottom: 30px;
+}
+
+.doctor-appointments-header h2 {
+  margin-bottom: 8px;
+  color: #1f2937;
+}
+
+.doctor-appointments-header p {
+  color: #6b7280;
+}
+
+.appointments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.appointment-card {
+  background: white;
+  padding: 24px;
+  border-radius: 14px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+}
+
+.appointment-card h3 {
+  margin-bottom: 15px;
+  color: #1f2937;
+}
+
+.appointment-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.appointment-details p {
+  margin: 0;
+  color: #4b5563;
+}
+
+.appointment-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.appointment-actions button {
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.confirm-button {
+  background: #16a34a;
+  color: white;
+}
+
+.reject-button {
+  background: #dc2626;
+  color: white;
+}
+
+.complete-button {
+  background: #2563eb;
+  color: white;
+}
+
+.appointment-actions button:hover {
+  opacity: 0.9;
+}
+
+.status {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.status-pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.status-confirmed {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status-rejected {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.status-completed {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.no-appointments {
+  background: white;
+  padding: 40px;
+  border-radius: 14px;
+  text-align: center;
+  color: #6b7280;
+}
+
+.loading {
+  text-align: center;
+  padding: 50px;
+  color: #6b7280;
+}
+
+.error-message {
+  background: #fee2e2;
+  color: #991b1b;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 700px) {
+  .appointment-details {
+    grid-template-columns: 1fr;
+  }
+
+  .appointment-actions {
+    flex-direction: column;
+  }
+
+  .appointment-actions button {
+    width: 100%;
+  }
+}
