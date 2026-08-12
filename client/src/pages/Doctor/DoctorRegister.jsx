@@ -1,8 +1,11 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { registerDoctor } from "../../services/doctorService";
 import "../../styles/DoctorRegister.css";
 
 function DoctorRegister() {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -32,10 +35,20 @@ function DoctorRegister() {
     try {
       const response = await registerDoctor(formData);
 
+      console.log("Doctor registration response:", response);
+
+      // Get the MongoDB ID of the newly registered doctor
+      const doctorId = response.data._id;
+
+      // Temporarily store doctor ID until authentication is implemented
+      localStorage.setItem("doctorId", doctorId);
+
       alert(response.message);
 
-      console.log(response);
+      // Optional: go directly to the doctor's portal after registration
+      navigate(`/doctors/${doctorId}/appointments`);
 
+      // Reset form
       setFormData({
         name: "",
         email: "",
@@ -52,23 +65,23 @@ function DoctorRegister() {
         image: "",
       });
     } catch (error) {
-  console.error("FULL ERROR:", error);
+      console.error("FULL ERROR:", error);
 
-  if (error.response) {
-    console.log("STATUS:", error.response.status);
-    console.log("DATA:", error.response.data);
+      if (error.response) {
+        console.log("STATUS:", error.response.status);
+        console.log("DATA:", error.response.data);
 
-    alert(
-      error.response.data.message || "Server returned an error"
-    );
-  } else if (error.request) {
-    console.log("REQUEST:", error.request);
-    alert("Backend server is not reachable");
-  } else {
-    console.log("ERROR:", error.message);
-    alert(error.message);
-  }
-}
+        alert(
+          error.response.data.message || "Server returned an error"
+        );
+      } else if (error.request) {
+        console.log("REQUEST:", error.request);
+        alert("Backend server is not reachable");
+      } else {
+        console.log("ERROR:", error.message);
+        alert(error.message);
+      }
+    }
   };
 
   return (
