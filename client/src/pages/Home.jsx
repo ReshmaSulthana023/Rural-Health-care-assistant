@@ -4,6 +4,18 @@ import "../styles/Home.css";
 function Home() {
   const navigate = useNavigate();
 
+  const handleDoctorPortal = () => {
+    const doctorId = localStorage.getItem("doctorId");
+
+    if (!doctorId) {
+      alert("Please register as a doctor first.");
+      navigate("/doctor/register");
+      return;
+    }
+
+    navigate(`/doctors/${doctorId}/appointments`);
+  };
+
   return (
     <div className="landing-container">
       <div className="landing-card">
@@ -11,11 +23,18 @@ function Home() {
         <p>Please select your path to continue</p>
 
         <div className="role-selection">
+
           {/* Patient Card */}
           <div className="role-card patient-card">
             <div className="role-icon">👤</div>
+
             <h2>Patient</h2>
-            <p>Register as a patient to find doctors and book consultations.</p>
+
+            <p>
+              Register as a patient to find doctors and
+              book consultations.
+            </p>
+
             <div className="role-actions">
               <button
                 className="btn primary-btn"
@@ -23,6 +42,7 @@ function Home() {
               >
                 Register as Patient
               </button>
+
               <button
                 className="btn secondary-btn"
                 onClick={() => navigate("/doctors")}
@@ -35,8 +55,14 @@ function Home() {
           {/* Doctor Card */}
           <div className="role-card doctor-card">
             <div className="role-icon">🩺</div>
+
             <h2>Doctor</h2>
-            <p>Register your medical practice and manage incoming patient bookings.</p>
+
+            <p>
+              Register your medical practice and manage
+              incoming patient bookings.
+            </p>
+
             <div className="role-actions">
               <button
                 className="btn primary-btn"
@@ -44,14 +70,16 @@ function Home() {
               >
                 Register as Doctor
               </button>
+
               <button
                 className="btn secondary-btn"
-                onClick={() => navigate("/doctors")}
+                onClick={handleDoctorPortal}
               >
                 View Portal
               </button>
             </div>
           </div>
+
         </div>
       </div>
     </div>
