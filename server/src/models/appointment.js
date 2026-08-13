@@ -39,6 +39,12 @@ const appointmentSchema = new mongoose.Schema(
       ],
       default: "Pending",
     },
+
+    // Telemedicine
+    meetLink: {
+      type: String,
+      default: null,
+    },
   },
   {
     timestamps: true,

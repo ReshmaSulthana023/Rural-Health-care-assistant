@@ -10,8 +10,10 @@ function DoctorProfile() {
   const [doctor, setDoctor] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Retrieve logged-in patient from localStorage
-  const savedPatient = JSON.parse(localStorage.getItem("currentPatient"));
+  const savedPatient = JSON.parse(
+    localStorage.getItem("currentPatient")
+  );
+
   const patientId = savedPatient?._id;
 
   useEffect(() => {
@@ -33,23 +35,42 @@ function DoctorProfile() {
   const handleBookClick = (e) => {
     if (!patientId) {
       e.preventDefault();
-      alert("Please register or log in as a patient first!");
+
+      alert(
+        "Please register or log in as a patient first!"
+      );
+
       navigate("/patients/register");
     }
   };
 
   if (loading) {
-    return <div className="loading">Loading profile...</div>;
+    return (
+      <div className="loading">
+        Loading profile...
+      </div>
+    );
   }
 
   if (!doctor) {
-    return <div className="empty-state">Doctor not found.</div>;
+    return (
+      <div className="empty-state">
+        Doctor not found.
+      </div>
+    );
   }
 
   return (
     <div className="profile-page">
+
       <div className="profile-card">
+
+        {/* =========================
+            Doctor Header
+        ========================= */}
+
         <div className="profile-top">
+
           {doctor.image ? (
             <img
               src={doctor.image}
@@ -57,17 +78,35 @@ function DoctorProfile() {
               className="profile-image"
             />
           ) : (
-            <div className="profile-placeholder">Dr</div>
+            <div className="profile-placeholder">
+              Dr
+            </div>
           )}
 
           <div>
-            <h1>Dr. {doctor.name}</h1>
-            <p className="profile-specialization">{doctor.specialization}</p>
-            <p>{doctor.experience} years experience</p>
+
+            <h1>
+              Dr. {doctor.name}
+            </h1>
+
+            <p className="profile-specialization">
+              {doctor.specialization}
+            </p>
+
+            <p>
+              {doctor.experience} years experience
+            </p>
+
           </div>
+
         </div>
 
+        {/* =========================
+            Doctor Details
+        ========================= */}
+
         <div className="profile-details">
+
           <div>
             <strong>Qualification</strong>
             <p>{doctor.qualification}</p>
@@ -80,7 +119,9 @@ function DoctorProfile() {
 
           <div>
             <strong>Hospital / Clinic</strong>
-            <p>{doctor.hospitalOrClinicName}</p>
+            <p>
+              {doctor.hospitalOrClinicName}
+            </p>
           </div>
 
           <div>
@@ -94,9 +135,15 @@ function DoctorProfile() {
             <strong>Address</strong>
             <p>{doctor.address}</p>
           </div>
+
         </div>
 
+        {/* =========================
+            Patient Action
+        ========================= */}
+
         <div className="profile-actions">
+
           <Link
             to={
               patientId
@@ -109,14 +156,10 @@ function DoctorProfile() {
             Book Appointment
           </Link>
 
-          <Link
-            to={`/doctors/${doctor._id}/edit`}
-            className="secondary-button"
-          >
-            Edit Profile
-          </Link>
         </div>
+
       </div>
+
     </div>
   );
 }
