@@ -1,4 +1,5 @@
 const Appointment = require("../models/appointment");
+const crypto = require("crypto");
 
 // ==========================================
 // Book Appointment
@@ -171,6 +172,27 @@ const updateAppointmentStatus = async (req, res) => {
     }
 
     appointment.status = status;
+
+    // ==========================================
+    // Telemedicine
+    // Generate meeting link when appointment
+    // is confirmed
+    // ==========================================
+
+    if (status === "Confirmed" && !appointment.meetLink) {
+      const roomId = crypto.randomUUID();
+
+      appointment.meetLink = `https://meet.jit.si/health-${roomId}`;
+    }
+
+    // If appointment is rejected or cancelled,
+    // remove the meeting link if one exists.
+    if (
+      status === "Rejected" ||
+      status === "Cancelled"
+    ) {
+      appointment.meetLink = null;
+    }
 
     await appointment.save();
 
