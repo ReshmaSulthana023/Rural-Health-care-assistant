@@ -1,0 +1,8 @@
+[33m520443b[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mtelemedicine[m[33m, [m[1;31morigin/telemedicine[m[33m)[m Added telemedicine feature
+ client/src/pages/Doctor/DoctorAppointment.jsx   | 224 [32m+++++++++[m[31m---------------[m
+ client/src/pages/Doctor/DoctorList.jsx          | 164 [32m+++++++++++[m[31m------[m
+ client/src/pages/Doctor/DoctorProfile.jsx       |  75 [32m++++++[m[31m--[m
+ client/src/pages/Patient/MyAppointments.jsx     | 221 [32m++++++++++++++++++++[m[31m---[m
+ server/src/controllers/appointmentController.js |  22 [32m+++[m
+ server/src/models/appointment.js                |   6 [32m+[m
+ 6 files changed, 472 insertions(+), 240 deletions(-)

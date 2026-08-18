@@ -1,138 +1,112 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useContext } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 
-import { registerPatient } from "../../services/patientService";
 
-import "../../styles/PatientRegister.css";
-
-function PatientRegister() {
-  const navigate = useNavigate();
-
+const PatientRegister = () => {
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    age: "",
-    gender: "",
-    city: "",
-    address: "",
+    name: '',
+    email: '',
+    password: '',
+    phone: '',
+    role: 'patient',
   });
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
+  const { register } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
+    setLoading(true);
 
     try {
-      const response = await registerPatient(formData);
-
-      alert(response.message || "Registration Successful!");
-
-      // 1. Extract patient object/data from backend response
-      const patientData = response.data || response.patient || response;
-
-      // 2. Persist patient info in localStorage so it can be accessed on booking
-      if (patientData && (patientData._id || patientData.id)) {
-        localStorage.setItem("currentPatient", JSON.stringify(patientData));
-
-        // 3. Navigate directly to the Doctors page to pick a doctor
-        navigate("/doctors");
-      } else {
-        alert("Registered, but could not retrieve Patient ID. Please try again.");
-      }
-    } catch (error) {
-      console.error("Patient Registration Error:", error);
-
-      alert(
-        error.response?.data?.message || "Patient registration failed"
-      );
+      const user = await register(formData);
+      navigate(`/patients/${user._id}/appointments`);
+    } catch (err) {
+      setError(err.response?.data?.message || 'Registration failed. Try again.');
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="patient-register-page">
-      <div className="patient-register-card">
-        <h1>Patient Registration</h1>
+    <div className="auth-container">
+      <div className="auth-card">
+        <div className="auth-header">
+          <h2>Create Account</h2>
+          <p>Register for affordable healthcare access</p>
+        </div>
 
-        <p className="subtitle">
-          Create your patient profile to book appointments.
-        </p>
+        {error && <div className="alert-message alert-error">{error}</div>}
 
-        <form onSubmit={handleSubmit} className="patient-form">
-          <input
-            name="name"
-            placeholder="Full Name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label>Full Name</label>
+            <input
+              type="text"
+              placeholder="John Doe"
+              required
+              value={formData.name}
+              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            />
+          </div>
 
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
+          <div className="form-group">
+            <label>Email Address</label>
+            <input
+              type="email"
+              placeholder="name@example.com"
+              required
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            />
+          </div>
 
-          <input
-            name="phone"
-            placeholder="Phone Number"
-            value={formData.phone}
-            onChange={handleChange}
-            required
-          />
+          <div className="form-group">
+            <label>Phone Number</label>
+            <input
+              type="tel"
+              placeholder="+91 9876543210"
+              required
+              value={formData.phone}
+              onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+            />
+          </div>
 
-          <input
-            type="number"
-            name="age"
-            placeholder="Age"
-            value={formData.age}
-            onChange={handleChange}
-            required
-          />
+          <div className="form-group">
+            <label>Password</label>
+            <div className="input-wrapper">
+              <input
+                type={showPassword ? 'text' : 'password'}
+                placeholder="Create a strong password"
+                required
+                value={formData.password}
+                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+              />
+              <button
+                type="button"
+                className="toggle-password"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? 'Hide' : 'Show'}
+              </button>
+            </div>
+          </div>
 
-          <select
-            name="gender"
-            value={formData.gender}
-            onChange={handleChange}
-            required
-          >
-            <option value="">Select Gender</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Other">Other</option>
-          </select>
-
-          <input
-            name="city"
-            placeholder="City"
-            value={formData.city}
-            onChange={handleChange}
-            required
-          />
-
-          <textarea
-            name="address"
-            placeholder="Address"
-            value={formData.address}
-            onChange={handleChange}
-            rows="4"
-          />
-
-          <button type="submit" className="primary-button">
-            Register & Find Doctor
+          <button type="submit" className="auth-btn" disabled={loading}>
+            {loading ? 'Creating Account...' : 'Register'}
           </button>
         </form>
+
+        <div className="auth-footer">
+          Already have an account? <Link to="/login">Sign In</Link>
+        </div>
       </div>
     </div>
   );
-}
+};
 
 export default PatientRegister;

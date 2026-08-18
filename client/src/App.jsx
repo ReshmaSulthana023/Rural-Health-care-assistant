@@ -26,10 +26,10 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Step 1: Initial Entry (Choice / Registration Gateway) */}
+        {/* Landing */}
         <Route path="/" element={<Home />} />
 
-        {/* Doctor Routes */}
+        {/* Doctor Routes - Fully Unlocked */}
         <Route path="/doctor/register" element={<DoctorRegister />} />
         <Route path="/doctors" element={<DoctorList />} />
         <Route path="/doctors/:doctorId" element={<DoctorProfile />} />
@@ -38,12 +38,12 @@ function App() {
         <Route path="/doctors/:doctorId/appointments" element={<DoctorAppointment />} />
         <Route path="/doctors/:doctorId/notifications" element={<Notification />} />
 
-        {/* Patient Routes */}
+        {/* Patient Routes - Fully Unlocked */}
         <Route path="/patients/register" element={<PatientRegister />} />
         <Route path="/patients/:patientId" element={<PatientProfile />} />
         <Route path="/patients/:patientId/appointments" element={<MyAppointments />} />
 
-        {/* Step 3: Appointment Booking */}
+        {/* Appointment Booking - Fully Unlocked */}
         <Route
           path="/book-appointment/:doctorId/:patientId"
           element={<BookAppointment />}
