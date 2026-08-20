@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema(
   {
+    // Common fields
     name: {
       type: String,
       required: true,
@@ -28,6 +29,17 @@ const userSchema = new mongoose.Schema(
       default: "",
     },
 
+    role: {
+      type: String,
+      enum: ["patient", "doctor"],
+      required: true,
+      default: "patient",
+    },
+
+    // =========================
+    // PATIENT DETAILS
+    // =========================
+
     age: {
       type: Number,
       min: 0,
@@ -38,6 +50,50 @@ const userSchema = new mongoose.Schema(
       enum: ["Male", "Female", "Other", ""],
       default: "",
     },
+
+    // =========================
+    // DOCTOR DETAILS
+    // =========================
+
+    medicalRegistrationNumber: {
+      type: String,
+      trim: true,
+      default: "",
+    },
+
+    specialization: {
+      type: String,
+      trim: true,
+      default: "",
+    },
+
+    qualification: {
+      type: String,
+      trim: true,
+      default: "",
+    },
+
+    yearsOfExperience: {
+      type: Number,
+      min: 0,
+      default: 0,
+    },
+
+    hospitalClinicName: {
+      type: String,
+      trim: true,
+      default: "",
+    },
+
+    consultationFee: {
+      type: Number,
+      min: 0,
+      default: 0,
+    },
+
+    // =========================
+    // COMMON LOCATION/LANGUAGE
+    // =========================
 
     location: {
       type: String,
