@@ -1,0 +1,48 @@
+.patient-profile-page {
+  min-height: 100vh;
+  padding: 50px 20px;
+  background: #f5f8fc;
+}
+
+.patient-profile-card {
+  max-width: 700px;
+  margin: auto;
+  padding: 40px;
+  background: white;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow:
+    0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+.patient-avatar {
+  width: 100px;
+  height: 100px;
+  margin: auto;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #dbeafe;
+  color: #2563eb;
+  font-size: 35px;
+  font-weight: 700;
+}
+
+.profile-label {
+  color: #2563eb;
+  font-weight: 600;
+}
+
+.patient-details {
+  display: grid;
+  grid-template-columns:
+    repeat(2, 1fr);
+  gap: 20px;
+  text-align: left;
+  margin: 30px 0;
+}
+
+.patient-details p {
+  color: #6b7280;
+}

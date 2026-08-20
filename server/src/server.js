@@ -8,20 +8,20 @@ const connectDB = require("./config/db");
 
 // Routes
 const doctorRoutes = require("./routes/doctorRoutes");
+const patientRoutes = require("./routes/patientRoutes");
+const availabilityRoutes = require("./routes/availabilityRoutes");
+const appointmentRoutes = require("./routes/appointmentRoutes");
+const notificationRoutes = require("./routes/notificationRoutes");
 const authRoutes = require("./routes/authRoutes");
 const symptomRoutes = require("./routes/symptomRoutes");
-const appointmentRoutes = require("./routes/appointmentRoutes");
 
-// Create Express app
 const app = express();
 
-
 // ==========================================
-// Connect to MongoDB
+// Connect Database
 // ==========================================
 
 connectDB();
-
 
 // ==========================================
 // Middleware
@@ -31,19 +31,27 @@ app.use(cors());
 app.use(helmet());
 app.use(express.json());
 
-
 // ==========================================
 // Routes
 // ==========================================
 
+// Doctor Routes
 app.use("/api/doctors", doctorRoutes);
 
-app.use("/api/auth", authRoutes);
+// Patient Routes
+app.use("/api/patients", patientRoutes);
 
-app.use("/api/symptoms", symptomRoutes);
+// Doctor Availability Routes
+app.use("/api/availability", availabilityRoutes);
 
+// Appointment Routes
 app.use("/api/appointments", appointmentRoutes);
 
+// Notification Routes
+app.use("/api/notifications", notificationRoutes);
+
+app.use("/api/auth", authRoutes);
+app.use("/api/symptoms", symptomRoutes);
 
 // ==========================================
 // Test Route
@@ -54,7 +62,6 @@ app.get("/ping", (req, res) => {
     status: "ok",
   });
 });
-
 
 // ==========================================
 // Start Server

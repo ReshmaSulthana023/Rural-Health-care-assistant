@@ -2,48 +2,56 @@ const express = require("express");
 
 const router = express.Router();
 
-// Import appointment controller
-const appointmentController = require("../controllers/appointmentController");
+const {
+  bookAppointment,
+  getAllAppointments,
+  getDoctorAppointments,
+  getPatientAppointments,
+  updateAppointmentStatus,
+} = require("../controllers/appointmentController");
 
-// Import authentication middleware
-const protect = require("../middleware/authMiddleware");
+// ==========================================
+// Book Appointment
+// POST /api/appointments/book
+// ==========================================
 
+router.post("/book", bookAppointment);
 
-// Patient gets all registered doctors
+// ==========================================
+// Get All Appointments
+// GET /api/appointments
+// ==========================================
+
+router.get("/", getAllAppointments);
+
+// ==========================================
+// Get Doctor Appointments
+// GET /api/appointments/doctor/:doctorId
+// ==========================================
+
 router.get(
-  "/doctors",
-  protect,
-  appointmentController.getRegisteredDoctors
+  "/doctor/:doctorId",
+  getDoctorAppointments
 );
 
-// Patient books an appointment
-router.post(
-  "/",
-  protect,
-  appointmentController.createAppointment
-);
+// ==========================================
+// Get Patient Appointments
+// GET /api/appointments/patient/:patientId
+// ==========================================
 
-// Patient gets their appointments
 router.get(
-  "/patient",
-  protect,
-  appointmentController.getPatientAppointments
+  "/patient/:patientId",
+  getPatientAppointments
 );
 
-// Doctor gets their appointments
-router.get(
-  "/doctor",
-  protect,
-  appointmentController.getDoctorAppointments
-);
+// ==========================================
+// Update Appointment Status
+// PUT /api/appointments/:id/status
+// ==========================================
 
-// Doctor accepts/rejects appointment
-router.patch(
+router.put(
   "/:id/status",
-  protect,
-  appointmentController.updateAppointmentStatus
+  updateAppointmentStatus
 );
 
-
-// Export router
 module.exports = router;

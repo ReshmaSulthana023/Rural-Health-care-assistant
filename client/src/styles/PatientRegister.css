@@ -1,0 +1,22 @@
+.patient-register-page {
+  min-height: 100vh;
+  padding: 50px 20px;
+  background: #f5f8fc;
+}
+
+.patient-register-card {
+  max-width: 650px;
+  margin: auto;
+  padding: 35px;
+  background: white;
+  border-radius: 18px;
+  box-shadow:
+    0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+.patient-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 25px;
+}
