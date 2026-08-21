@@ -497,116 +497,197 @@
       justify-content: center;
       align-items: center;
       background: var(--cream);
-      padding: 20px;
+      padding: 24px;
     }
 
     .login-box {
-      width: 380px;
+      width: 760px;
       max-width: 100%;
       background: white;
-      padding: 35px;
-      border-radius: 20px;
+      padding: 38px 42px;
+      border-radius: 22px;
       border: 1px solid var(--line);
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 18px 50px rgba(22, 48, 43, 0.10);
       text-align: center;
     }
 
     .login-logo {
-      width: 55px;
-      height: 55px;
+      width: 58px;
+      height: 58px;
       margin: auto;
       display: grid;
       place-items: center;
-      border-radius: 15px;
+      border-radius: 16px;
       background: var(--green);
       color: white;
-      font-size: 28px;
+      font-size: 30px;
+      box-shadow: 0 7px 16px rgba(15,118,104,.20);
     }
 
     .login-box h1 {
-      margin: 15px 0 5px;
+      margin: 14px 0 5px;
       font-family: Georgia, serif;
       color: var(--ink);
+      font-size: 31px;
     }
 
     .login-box > p {
       color: var(--muted);
-      margin-bottom: 25px;
+      margin: 0 0 24px;
+      font-size: 14px;
+    }
+
+    .auth-tabs {
+      display: flex;
+      gap: 6px;
+      margin: 0 auto 24px;
+      max-width: 430px;
+      background: var(--green-2);
+      padding: 5px;
+      border-radius: 11px;
+    }
+
+    .auth-tab {
+      flex: 1;
+      margin: 0 !important;
+      padding: 11px 10px !important;
+      background: transparent !important;
+      color: var(--green) !important;
+      border: 0 !important;
+      border-radius: 8px !important;
+      box-shadow: none !important;
+      font-size: 14px;
+      cursor: pointer;
+      font-weight: 800;
+    }
+
+    .auth-tab.active {
+      background: white !important;
+      box-shadow: 0 2px 7px rgba(0,0,0,.09) !important;
+    }
+
+    .role-title {
+      margin: 0 0 12px;
+      color: var(--ink);
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .role-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .role-card {
+      border: 1.5px solid var(--line);
+      border-radius: 14px;
+      background: #fbfcfb;
+      padding: 19px 16px;
+      cursor: pointer;
+      transition: .18s;
+      text-align: center;
+    }
+
+    .role-card:hover {
+      border-color: #9bcfc3;
+      background: #f4faf7;
+      transform: translateY(-2px);
+    }
+
+    .role-card.selected {
+      border-color: var(--green);
+      background: var(--green-2);
+      box-shadow: 0 0 0 2px rgba(15,118,104,.08);
+    }
+
+    .role-icon {
+      width: 52px;
+      height: 52px;
+      margin: 0 auto 10px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: white;
+      font-size: 28px;
+      border: 1px solid var(--line);
+    }
+
+    .role-card.selected .role-icon {
+      border-color: #b7d9d0;
+    }
+
+    .role-card h3 {
+      margin: 0 0 5px;
+      font-size: 16px;
+      color: var(--ink);
+    }
+
+    .role-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.4;
+    }
+
+    .role-status {
+      min-height: 18px;
+      margin: -7px 0 7px;
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 750;
+    }
+
+    .login-form-area,
+    .register-form-area {
+      max-width: 500px;
+      margin: 0 auto;
+      text-align: left;
     }
 
     .login-box label {
       display: block;
       text-align: left;
-      margin: 15px 0 6px;
+      margin: 14px 0 6px;
       font-size: 13px;
       font-weight: 700;
     }
 
-    .login-box input {
+    .login-box input,
+    .login-box select {
       width: 100%;
-      padding: 12px;
+      padding: 12px 13px;
       border: 1px solid var(--line);
-      border-radius: 8px;
+      border-radius: 9px;
       outline: none;
       font-size: 14px;
+      background: white;
+      color: var(--ink);
     }
 
-    .login-box input:focus {
+    .login-box input:focus,
+    .login-box select:focus {
       border-color: var(--green);
+      box-shadow: 0 0 0 3px rgba(15,118,104,.08);
     }
 
-    .login-box button {
+    .login-box button[type="submit"] {
       width: 100%;
-      margin-top: 22px;
-      padding: 12px;
+      margin-top: 20px;
+      padding: 13px;
       border: none;
       border-radius: 9px;
       background: var(--green);
       color: white;
       font-weight: 800;
       cursor: pointer;
-    }
-
-    .auth-tabs {
-      display: flex;
-      gap: 8px;
-      margin: 0 0 20px;
-      background: var(--green-2);
-      padding: 4px;
-      border-radius: 10px;
-    }
-
-    .auth-tab {
-      flex: 1;
-      margin: 0 !important;
-      padding: 9px 8px !important;
-      background: transparent !important;
-      color: var(--green) !important;
-      border: 0 !important;
-      border-radius: 7px !important;
-      box-shadow: none !important;
-    }
-
-    .auth-tab.active {
-      background: white !important;
-      box-shadow: 0 2px 6px rgba(0,0,0,.08) !important;
-    }
-
-    .login-box select {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      outline: none;
       font-size: 14px;
-      background: white;
-      color: var(--ink);
+      transition: .18s;
     }
 
-    #registerForm {
-      max-height: 470px;
-      overflow-y: auto;
-      padding-right: 4px;
+    .login-box button[type="submit"]:hover {
+      background: #0c675c;
     }
 
     .login-box button:disabled {
@@ -614,10 +695,49 @@
       cursor: not-allowed;
     }
 
-    #loginMessage {
-      margin-top: 15px;
+    #registerForm {
+      max-height: 470px;
+      overflow-y: auto;
+      padding-right: 5px;
+    }
+
+    #registerForm::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    #registerForm::-webkit-scrollbar-thumb {
+      background: #cbded9;
+      border-radius: 10px;
+    }
+
+    .register-fields-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .register-fields-grid > div {
+      min-width: 0;
+    }
+
+    #patientRegisterFields,
+    #doctorRegisterFields {
+      transition: opacity .18s ease;
+    }
+
+    @media(max-width:600px) {
+      .register-fields-grid {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+    }
+
+    #loginMessage,
+    #registerMessage {
+      margin-top: 13px;
       min-height: 18px;
       font-size: 13px;
+      text-align: center;
     }
 
     .logout-button {
@@ -663,6 +783,16 @@
     }
 
     @media(max-width:500px) {
+      .login-box {
+        padding: 28px 20px;
+      }
+
+      .role-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+
       main {
         padding: 18px
       }
@@ -692,6 +822,429 @@
         margin-bottom: 24px
       }
     }
+
+
+
+    .doctor-directory {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .doctor-directory-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 18px;
+      display: flex;
+      gap: 15px;
+      align-items: flex-start;
+    }
+
+    .doctor-directory-avatar {
+      width: 52px;
+      height: 52px;
+      min-width: 52px;
+      border-radius: 50%;
+      background: var(--green-2);
+      display: grid;
+      place-items: center;
+      font-size: 25px;
+    }
+
+    .doctor-directory-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .doctor-directory-info h4 {
+      margin: 0 0 5px;
+      font-size: 15px;
+    }
+
+    .doctor-directory-info .doctor-specialization {
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .doctor-detail {
+      color: var(--muted);
+      font-size: 11px;
+      margin: 4px 0;
+      line-height: 1.4;
+    }
+
+    .doctor-fee {
+      font-size: 14px;
+      font-weight: 850;
+      color: var(--ink);
+      margin-top: 8px;
+    }
+
+    .book-doctor-button {
+      margin-top: 12px;
+      border: 0;
+      background: var(--green);
+      color: white;
+      border-radius: 9px;
+      padding: 10px 13px;
+      font-size: 11px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .book-doctor-button:hover {
+      background: #0c675c;
+    }
+
+    .doctor-directory-message {
+      background: var(--card);
+      border: 1px dashed var(--line);
+      border-radius: 15px;
+      padding: 25px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+      grid-column: 1 / -1;
+    }
+
+    .booking-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(22,48,43,.42);
+      z-index: 30;
+      padding: 20px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .booking-modal.show {
+      display: flex;
+    }
+
+    .booking-box {
+      width: 520px;
+      max-width: 100%;
+      background: white;
+      border-radius: 18px;
+      padding: 25px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.18);
+    }
+
+    .booking-box h2 {
+      margin: 0 0 6px;
+      font-family: Georgia, serif;
+    }
+
+    .booking-box p {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .booking-box label {
+      display: block;
+      margin: 13px 0 6px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .booking-box input,
+    .booking-box textarea,
+    .booking-box select {
+      width: 100%;
+      padding: 11px 12px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      outline: none;
+      font-size: 13px;
+      font-family: inherit;
+    }
+
+    .booking-box textarea {
+      min-height: 85px;
+      resize: vertical;
+    }
+
+    .booking-actions {
+      display: flex;
+      gap: 9px;
+      margin-top: 18px;
+    }
+
+    .booking-actions button {
+      flex: 1;
+      padding: 11px;
+      border-radius: 9px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .booking-cancel {
+      background: white;
+      border: 1px solid var(--line);
+      color: var(--green);
+    }
+
+    .booking-submit {
+      background: var(--green);
+      border: 1px solid var(--green);
+      color: white;
+    }
+
+    @media(max-width:800px) {
+      .doctor-directory {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Role-based dashboards + Appointments */
+    .doctor-dashboard {
+      display: none;
+    }
+
+    .patient-dashboard {
+      display: block;
+    }
+
+    .doctor-hero {
+      background: linear-gradient(115deg, #157c70, #0e6259);
+      color: white;
+      border-radius: 22px;
+      padding: 28px 32px;
+      margin-bottom: 25px;
+    }
+
+    .doctor-hero h2 {
+      margin: 0 0 7px;
+      font-family: Georgia, serif;
+      font-weight: 500;
+      font-size: 26px;
+    }
+
+    .doctor-hero p {
+      margin: 0;
+      color: #daf2ed;
+      font-size: 14px;
+    }
+
+    .doctor-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 25px;
+    }
+
+    .doctor-stat {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 18px;
+    }
+
+    .doctor-stat span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 7px;
+    }
+
+    .doctor-stat strong {
+      font-size: 25px;
+    }
+
+    .appointment-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .appointment-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      padding: 17px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .appointment-card-main {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .appointment-card-main strong {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+
+    .appointment-card-main span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 3px;
+    }
+
+    .appointment-status {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .status-requested { background: #fff1d9; color: #9a6500; }
+    .status-accepted { background: #e5f4ec; color: #22704f; }
+    .status-rejected { background: #fde4df; color: #a23f31; }
+    .status-completed { background: #e8f3fb; color: #2d668d; }
+
+    .appointment-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .appointment-action {
+      border: 1px solid var(--line);
+      background: white;
+      color: var(--green);
+      border-radius: 8px;
+      padding: 8px 11px;
+      font-size: 11px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .appointment-action.accept {
+      background: var(--green);
+      border-color: var(--green);
+      color: white;
+    }
+
+    .appointment-action.reject {
+      color: var(--danger);
+      border-color: #efc8c0;
+    }
+
+    .appointment-action:hover {
+      opacity: .88;
+    }
+
+    .consultation-link-status {
+      color: var(--muted);
+      font-size: 11px;
+      padding: 8px 0;
+    }
+
+    .appointment-action.consultation {
+      background: var(--green);
+      border-color: var(--green);
+      color: white;
+    }
+
+    .appointment-action.consultation:hover {
+      opacity: .88;
+    }
+
+
+
+    .empty-appointments {
+      background: var(--card);
+      border: 1px dashed var(--line);
+      border-radius: 15px;
+      padding: 30px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .doctor-section-title {
+      margin: 28px 0 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .doctor-section-title h3 {
+      margin: 0;
+      font-size: 17px;
+    }
+
+    .doctor-section-title button {
+      border: 0;
+      background: transparent;
+      color: var(--green);
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .doctor-profile-strip {
+      margin-top: 25px;
+      background: #edf4ef;
+      border-radius: 16px;
+      padding: 16px;
+      color: #526862;
+      font-size: 12px;
+    }
+
+    .doctor-profile-strip strong {
+      color: var(--ink);
+    }
+
+    @media(max-width:700px) {
+      .doctor-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .appointment-card {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .appointment-actions {
+        justify-content: flex-start;
+      }
+    }
+
+    /* Symptom Checker */
+    .symptom-modal{display:none;position:fixed;inset:0;background:rgba(22,48,43,.42);z-index:20;padding:20px;overflow-y:auto;align-items:center;justify-content:center}
+    .symptom-modal.show{display:flex}
+    .symptom-box{width:760px;max-width:100%;max-height:92vh;overflow-y:auto;background:white;border-radius:20px;border:1px solid var(--line);box-shadow:0 20px 60px rgba(0,0,0,.18);padding:26px}
+    .symptom-header{display:flex;justify-content:space-between;align-items:flex-start;gap:15px;margin-bottom:20px}
+    .symptom-header h2{margin:0 0 5px;font-family:Georgia,serif;font-weight:600}
+    .symptom-header p{margin:0;color:var(--muted);font-size:13px;line-height:1.45}
+    .close-symptom{border:0;background:var(--green-2);color:var(--green);width:34px;height:34px;border-radius:50%;font-size:20px;cursor:pointer}
+    .symptom-label{display:block;font-size:13px;font-weight:800;margin:18px 0 8px}
+    .symptom-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+    .symptom-option{border:1px solid var(--line);border-radius:10px;padding:11px;cursor:pointer;background:#fffdf8;font-size:13px}
+    .symptom-option:hover{border-color:var(--green);background:var(--green-2)}
+    .symptom-option input{margin-right:7px;accent-color:var(--green)}
+    .symptom-fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .symptom-fields input,.symptom-fields select{width:100%;padding:12px;border:1px solid var(--line);border-radius:9px;outline:none;font-size:14px;background:white}
+    .symptom-fields input:focus,.symptom-fields select:focus{border-color:var(--green)}
+    .check-symptom-button{width:100%;margin-top:20px;padding:13px;border:0;border-radius:10px;background:var(--green);color:white;font-weight:800;cursor:pointer}
+    .check-symptom-button:disabled{opacity:.7;cursor:not-allowed}
+    .symptom-result{display:none;margin-top:22px;border:1px solid var(--line);border-radius:14px;padding:18px;background:#f7fbf9}
+    .symptom-result.show{display:block}
+    .result-title{margin:0 0 13px;font-size:16px}
+    .result-row{margin:10px 0;font-size:13px;line-height:1.5}
+    .urgency{display:inline-block;padding:4px 9px;border-radius:999px;font-size:11px;font-weight:800}
+    .urgency-low{background:#e5f4ec;color:#22704f}
+    .urgency-moderate{background:#fff1d9;color:#9a6500}
+    .urgency-high,.urgency-emergency{background:#fde4df;color:#a23f31}
+    .history-section{margin-top:25px;border-top:1px solid var(--line);padding-top:20px}
+    .history-item{padding:12px;border:1px solid var(--line);border-radius:10px;margin-top:9px;background:white;font-size:12px}
+    .history-item strong{display:block;margin-bottom:4px}
+    @media(max-width:600px){.symptom-grid{grid-template-columns:1fr 1fr}.symptom-fields{grid-template-columns:1fr}.symptom-box{padding:20px}}
+
   </style>
 </head>
 
@@ -708,63 +1261,180 @@
           <button type="button" id="registerTab" class="auth-tab" onclick="showRegisterForm()">Create Account</button>
         </div>
 
-        <form id="loginForm">
-          <label for="loginEmail">Email</label>
-          <input type="email" id="loginEmail" placeholder="Enter your email" autocomplete="email" required />
+        <div id="loginSection">
+          <div class="role-title">Please select your role</div>
 
-          <label for="loginPassword">Password</label>
-          <input type="password" id="loginPassword" placeholder="Enter your password" autocomplete="current-password" required />
+          <div class="role-grid">
+            <div class="role-card selected" id="loginPatientRole" onclick="selectLoginRole('patient')">
+              <div class="role-icon">👤</div>
+              <h3>Patient</h3>
+              <p>Find doctors and book consultations.</p>
+            </div>
 
-          <button id="loginButton" type="submit">Login</button>
-          <div id="loginMessage"></div>
-        </form>
+            <div class="role-card" id="loginDoctorRole" onclick="selectLoginRole('doctor')">
+              <div class="role-icon">🩺</div>
+              <h3>Doctor</h3>
+              <p>Manage your practice and patient bookings.</p>
+            </div>
+          </div>
 
-        <form id="registerForm" style="display:none;">
-          <label for="registerName">Full Name</label>
-          <input type="text" id="registerName" placeholder="Enter your name" autocomplete="name" required />
+          <div class="role-status" id="loginRoleStatus">Logging in as Patient</div>
 
-          <label for="registerEmail">Email</label>
-          <input type="email" id="registerEmail" placeholder="Enter your email" autocomplete="email" required />
+          <form id="loginForm" class="login-form-area">
+            <label for="loginEmail">Email</label>
+            <input type="email" id="loginEmail" placeholder="Enter your email" autocomplete="email" required />
 
-          <label for="registerPassword">Password</label>
-          <input type="password" id="registerPassword" placeholder="Create a password" autocomplete="new-password" minlength="6" required />
+            <label for="loginPassword">Password</label>
+            <input type="password" id="loginPassword" placeholder="Enter your password" autocomplete="current-password" required />
 
-          <label for="registerPhone">Phone</label>
-          <input type="tel" id="registerPhone" placeholder="Enter phone number" autocomplete="tel" />
+            <div style="text-align:right;margin:6px 0 12px;">
+              <button
+                type="button"
+                onclick="openForgotPasswordModal()"
+                style="border:0;background:none;color:var(--green);cursor:pointer;font-size:12px;padding:0;"
+              >
+                Forgot password?
+              </button>
+            </div>
 
-          <label for="registerAge">Age</label>
-          <input type="number" id="registerAge" placeholder="Enter age" min="1" max="120" />
+            <button id="loginButton" type="submit">Login as Patient</button>
+            <div id="loginMessage"></div>
+          </form>
+        </div>
 
-          <label for="registerGender">Gender</label>
-          <select id="registerGender">
-            <option value="">Select gender</option>
-            <option value="Female">Female</option>
-            <option value="Male">Male</option>
-            <option value="Other">Other</option>
-            <option value="Prefer not to say">Prefer not to say</option>
-          </select>
+        <div id="registerSection" style="display:none;">
+          <div class="role-title">Create your account as</div>
 
-          <label for="registerLocation">Location</label>
-          <input type="text" id="registerLocation" placeholder="Village / City / District" />
+          <div class="role-grid">
+            <div class="role-card selected" id="registerPatientRole" onclick="selectRegisterRole('patient')">
+              <div class="role-icon">👤</div>
+              <h3>Patient</h3>
+              <p>Register to find doctors and book consultations.</p>
+            </div>
 
-          <label for="registerLanguage">Preferred Language</label>
-          <input type="text" id="registerLanguage" placeholder="e.g. English, Telugu, Hindi" />
+            <div class="role-card" id="registerDoctorRole" onclick="selectRegisterRole('doctor')">
+              <div class="role-icon">🩺</div>
+              <h3>Doctor</h3>
+              <p>Register your medical practice and manage bookings.</p>
+            </div>
+          </div>
 
-          <button id="registerButton" type="submit">Create Account</button>
-          <div id="registerMessage"></div>
-        </form>
+          <div class="role-status" id="registerRoleStatus">Creating a Patient account</div>
+
+          <form id="registerForm" class="register-form-area">
+
+              <!-- Common account fields -->
+              <div id="commonRegisterFields">
+                <label for="registerName">Full Name</label>
+                <input type="text" id="registerName" placeholder="Enter your full name" autocomplete="name" required />
+
+                <label for="registerEmail">Email</label>
+                <input type="email" id="registerEmail" placeholder="Enter your email" autocomplete="email" required />
+
+                <label for="registerPassword">Password</label>
+                <input type="password" id="registerPassword" placeholder="Create a password" autocomplete="new-password" minlength="6" required />
+
+                <label for="registerPhone">Phone</label>
+                <input type="tel" id="registerPhone" placeholder="Enter phone number" autocomplete="tel" required />
+              </div>
+
+              <!-- Patient-only fields -->
+              <div id="patientRegisterFields">
+                <div class="register-fields-grid">
+                  <div>
+                    <label for="registerAge">Age</label>
+                    <input type="number" id="registerAge" placeholder="Enter age" min="1" max="120" required />
+                  </div>
+
+                  <div>
+                    <label for="registerGender">Gender</label>
+                    <select id="registerGender" required>
+                      <option value="">Select gender</option>
+                      <option value="Female">Female</option>
+                      <option value="Male">Male</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+                </div>
+
+                <label for="registerLocation">Location</label>
+                <input type="text" id="registerLocation" placeholder="Village / City / District" required />
+
+                <label for="registerLanguage">Preferred Language</label>
+                <input type="text" id="registerLanguage" placeholder="e.g. Telugu, Hindi, English" required />
+              </div>
+
+              <!-- Doctor-only fields -->
+              <div id="doctorRegisterFields" style="display:none;">
+                <label for="registerMedicalNumber">Medical Registration Number</label>
+                <input type="text" id="registerMedicalNumber" placeholder="Enter medical registration number" />
+
+                <label for="registerSpecialization">Specialization</label>
+                <select id="registerSpecialization">
+                  <option value="">Select specialization</option>
+                  <option value="General Physician">General Physician</option>
+                  <option value="Pediatrics">Pediatrics</option>
+                  <option value="Gynecology">Gynecology</option>
+                  <option value="Cardiology">Cardiology</option>
+                  <option value="Dermatology">Dermatology</option>
+                  <option value="Orthopedics">Orthopedics</option>
+                  <option value="ENT">ENT</option>
+                  <option value="Ophthalmology">Ophthalmology</option>
+                  <option value="Dentistry">Dentistry</option>
+                  <option value="Psychiatry">Psychiatry</option>
+                  <option value="Other">Other</option>
+                </select>
+
+                <label for="registerQualification">Qualification</label>
+                <input type="text" id="registerQualification" placeholder="e.g. MBBS, MD" />
+
+                <label for="registerExperience">Years of Experience</label>
+                <input type="number" id="registerExperience" placeholder="Enter years of experience" min="0" max="60" />
+
+                <label for="registerClinic">Hospital / Clinic Name</label>
+                <input type="text" id="registerClinic" placeholder="Enter hospital or clinic name" />
+
+                <label for="registerDoctorLocation">Location</label>
+                <input type="text" id="registerDoctorLocation" placeholder="Village / City / District" />
+
+                <label for="registerFee">Consultation Fee (₹)</label>
+                <input type="number" id="registerFee" placeholder="Enter consultation fee" min="0" />
+
+                <label for="registerDoctorLanguage">Preferred Language</label>
+                <input type="text" id="registerDoctorLanguage" placeholder="e.g. Telugu, Hindi, English" />
+              </div>
+
+              <button id="registerButton" type="submit">Create Patient Account</button>
+              <div id="registerMessage"></div>
+            </form>
+        </div>
       </div>
     </div>
 
-  <div class="app">
+      <div class="app">
     <aside class="sidebar">
       <div class="brand">
         <div class="brand-mark">✚</div>
         <div>Swasthya Saathi<small>Health, closer to home</small></div>
       </div>
-      <nav><a class="nav-item active"><span>⌂</span>Dashboard</a><a class="nav-item"><span>♡</span>Symptom Checker</a><a
-          class="nav-item"><span>▣</span>Appointments</a><a class="nav-item"><span>◉</span>Telemedicine</a><a
-          class="nav-item"><span>◷</span>Medicine Reminders</a><a class="nav-item"><span>▤</span>Health Records</a>
+      <nav>
+        <div id="patientNav">
+          <a class="nav-item active"><span>⌂</span>Dashboard</a>
+          <a class="nav-item" onclick="openSymptomChecker()"><span>♡</span>Symptom Checker</a>
+          <a class="nav-item" id="patientAppointmentsNav" onclick="openPatientAppointments()"><span>▣</span>Appointments</a>
+          <a class="nav-item" onclick="openPatientAppointments()"><span>◉</span>Telemedicine</a>
+          <a class="nav-item"><span>◷</span>Medicine Reminders</a>
+          <a class="nav-item"><span>▤</span>Health Records</a>
+        </div>
+
+        <div id="doctorNav" style="display:none;">
+          <a class="nav-item active"><span>⌂</span>Doctor Dashboard</a>
+          <a class="nav-item" onclick="loadDoctorAppointments()"><span>▣</span>Appointments</a>
+          <a class="nav-item"><span>◉</span>Telemedicine</a>
+          <a class="nav-item"><span>👥</span>My Patients</a>
+          <a class="nav-item"><span>▤</span>Patient Records</a>
+          <a class="nav-item"><span>◉</span>Doctor Profile</a>
+        </div>
       </nav>
       <div class="help"><strong>Need urgent help?</strong>For a medical emergency, call your local emergency service
         right away.<button onclick="notify('Emergency contacts are being prepared')">Emergency help</button></div>
@@ -775,82 +1445,413 @@
         <div class="location">⌖ <b>Chandrapur, Maharashtra</b> · Connected</div>
         <div class="profile">
           <div class="bell">♧<i class="dot"></i></div>
-          <div class="avatar">👩🏽</div>
-          <button class="logout-button" type="button" onclick="logoutUser()">
-            Logout
-          </button>
+          <div class="avatar" id="profileAvatar">👩🏽</div>
+          <button class="logout-button" type="button" onclick="logoutUser()">Logout</button>
         </div>
       </div>
-      <section class="welcome">
-        <div>
-          <div class="eyebrow">Your health companion</div>
-          <h1 id="welcomeMessage">Good morning.</h1>
+
+      <!-- ================= PATIENT DASHBOARD ================= -->
+      <div id="patientDashboard" class="patient-dashboard">
+        <section class="welcome">
+          <div>
+            <div class="eyebrow">Your health companion</div>
+            <h1 id="welcomeMessage">Good morning.</h1>
+          </div>
+          <div class="today" id="todayDate">Loading date...</div>
+        </section>
+
+        <section class="hero">
+          <div class="hero-content">
+            <h2>How are you feeling today?</h2>
+            <p>Describe what you’re experiencing and get guidance on the right next step, in your own language.</p>
+            <button class="primary" onclick="openSymptomChecker()">Start symptom check →</button>
+          </div>
+          <div class="hero-art">🩺</div>
+        </section>
+
+        <div class="section-title">
+          <h3>What would you like to do?</h3>
+          <a onclick="notify('All health services opened')">View all services</a>
         </div>
-        <div class="today">Tuesday, 4 August 2026</div>
-      </section>
-      <section class="hero">
-        <div class="hero-content">
-          <h2>How are you feeling today?</h2>
-          <p>Describe what you’re experiencing and get guidance on the right next step, in your own language.</p><button
-            class="primary" onclick="notify('Symptom check started — tell us what you feel')">Start symptom check
-            →</button>
+
+        <section class="quick-grid">
+          <article class="quick" onclick="openSymptomChecker()">
+            <div class="quick-icon">♡</div>
+            <h4>Check symptoms</h4>
+            <p>Understand possible causes and next steps</p>
+          </article>
+          <article class="quick" onclick="notify('Appointment booking opened')">
+            <div class="quick-icon">▣</div>
+            <h4>Book appointment</h4>
+            <p>Find a doctor at a nearby health centre</p>
+          </article>
+          <article class="quick" onclick="openPatientAppointments()">
+            <div class="quick-icon">◉</div>
+            <h4>Talk to a doctor</h4>
+            <p>Connect online from the comfort of home</p>
+          </article>
+          <article class="quick" onclick="notify('Medicine reminders opened')">
+            <div class="quick-icon">◷</div>
+            <h4>Medicine reminders</h4>
+            <p>Stay on track with your treatment</p>
+          </article>
+        </section>
+
+        <section class="lower">
+          <div class="panel">
+            <h3>Upcoming appointment</h3>
+            <div id="patientUpcomingAppointment">
+              <div class="empty-appointments">Loading appointments...</div>
+            </div>
+          </div>
+          <div class="panel">
+            <h3>Today’s reminders</h3>
+            <div class="reminder">
+              <div class="pill">💊</div>
+              <div><strong>Medicine reminders</strong><span>Your scheduled reminders will appear here.</span></div>
+            </div>
+          </div>
+        </section>
+
+        <div class="doctor-section-title">
+          <h3>My appointments</h3>
+          <div style="display:flex;gap:8px;align-items:center;">
+            <button type="button" onclick="notify('Appointment booking opened')">+ Book Consultation</button>
+            <button type="button" onclick="loadPatientAppointments()">Refresh</button>
+          </div>
         </div>
-        <div class="hero-art">🩺</div>
-      </section>
-      <div class="section-title">
-        <h3>What would you like to do?</h3><a onclick="notify('All health services opened')">View all services</a>
+        <div id="patientAppointmentList" class="appointment-list">
+          <div class="empty-appointments">Loading appointments...</div>
+        </div>
+
+        <!-- Dedicated Patient Appointments View -->
+        <section id="patientAppointmentsView" style="display:none; margin-top:30px;">
+          <div class="doctor-section-title">
+            <h3>Appointments</h3>
+            <button type="button" onclick="showPatientDashboard()">← Dashboard</button>
+          </div>
+
+          <div class="panel" style="margin-bottom:18px;">
+            <h3>Upcoming Appointment</h3>
+            <div id="patientAppointmentsUpcoming">
+              <div class="empty-appointments">No confirmed upcoming appointment.</div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h3>All My Appointments</h3>
+            <div id="patientAppointmentsAll" class="appointment-list">
+              <div class="empty-appointments">Loading appointments...</div>
+            </div>
+          </div>
+
+          <div class="doctor-section-title">
+            <h3>Available Doctors</h3>
+            <button type="button" onclick="loadRegisteredDoctors()">Refresh</button>
+          </div>
+
+          <div id="doctorDirectory" class="doctor-directory">
+            <div class="doctor-directory-message">Loading registered doctors...</div>
+          </div>
+        </section>
       </div>
-      <section class="quick-grid">
-        <article class="quick" onclick="notify('Symptom Checker opened')">
-          <div class="quick-icon">♡</div>
-          <h4>Check symptoms</h4>
-          <p>Understand possible causes and next steps</p>
-        </article>
-        <article class="quick" onclick="notify('Appointment booking opened')">
-          <div class="quick-icon">▣</div>
-          <h4>Book appointment</h4>
-          <p>Find a doctor at a nearby health centre</p>
-        </article>
-        <article class="quick" onclick="notify('Telemedicine consultation opened')">
-          <div class="quick-icon">◉</div>
-          <h4>Talk to a doctor</h4>
-          <p>Connect online from the comfort of home</p>
-        </article>
-        <article class="quick" onclick="notify('Medicine reminders opened')">
-          <div class="quick-icon">◷</div>
-          <h4>Medicine reminders</h4>
-          <p>Stay on track with your treatment</p>
-        </article>
-      </section>
-      <section class="lower">
-        <div class="panel">
-          <h3>Upcoming appointment</h3>
-          <div class="appointment">
-            <div class="datebox">AUG<b>06</b></div>
-            <div class="appt-info"><strong>Dr. Anjali Deshmukh</strong><span>General Physician · 10:30 AM · Video
-                consultation</span></div><button class="video"
-              onclick="notify('Joining secure video consultation…')">Join call</button>
+
+      <!-- ================= DOCTOR DASHBOARD ================= -->
+      <div id="doctorDashboard" class="doctor-dashboard">
+        <section class="welcome">
+          <div>
+            <div class="eyebrow">Doctor Portal</div>
+            <h1 id="doctorWelcomeMessage">Welcome, Doctor.</h1>
           </div>
+          <div class="today" id="doctorTodayDate">Loading date...</div>
+        </section>
+
+        <section class="doctor-hero">
+          <h2>Manage your consultations</h2>
+          <p>Review patient requests, accept or reject consultations, and manage your upcoming appointments.</p>
+        </section>
+
+        <section class="doctor-stats">
+          <div class="doctor-stat">
+            <span>Pending Requests</span>
+            <strong id="pendingAppointmentCount">0</strong>
+          </div>
+          <div class="doctor-stat">
+            <span>Accepted</span>
+            <strong id="acceptedAppointmentCount">0</strong>
+          </div>
+          <div class="doctor-stat">
+            <span>Total Appointments</span>
+            <strong id="totalAppointmentCount">0</strong>
+          </div>
+        </section>
+
+        <div class="doctor-section-title">
+          <h3>Consultation Requests</h3>
+          <button type="button" onclick="loadDoctorAppointments()">Refresh</button>
         </div>
-        <div class="panel">
-          <h3>Today’s reminders</h3>
-          <div class="reminder">
-            <div class="pill">💊</div>
-            <div><strong>Metformin 500 mg</strong><span>After breakfast</span></div>
-            <div class="time">8:30 AM</div>
-          </div>
-          <div class="reminder">
-            <div class="pill">💊</div>
-            <div><strong>Vitamin D3</strong><span>After lunch</span></div>
-            <div class="time">1:00 PM</div>
-          </div>
+        <div id="doctorPendingList" class="appointment-list">
+          <div class="empty-appointments">Loading consultation requests...</div>
         </div>
-      </section>
+
+        <div class="doctor-section-title">
+          <h3>Accepted / Upcoming Consultations</h3>
+        </div>
+        <div id="doctorAcceptedList" class="appointment-list">
+          <div class="empty-appointments">Loading accepted consultations...</div>
+        </div>
+
+        <div class="doctor-profile-strip" id="doctorProfileStrip">
+          <strong>Doctor profile:</strong> Loading...
+        </div>
+      </div>
     </main>
   </div>
+
+
+  <!-- Book Appointment Modal -->
+  <div id="bookingModal" class="booking-modal" onclick="closeBookingOnBackdrop(event)">
+    <div class="booking-box">
+      <h2>Book Consultation</h2>
+      <p id="bookingDoctorSummary">Choose your preferred consultation date and provide a reason.</p>
+
+      <form id="bookingForm">
+        <label for="bookingDateTime">Consultation Date & Time</label>
+        <input type="datetime-local" id="bookingDateTime" required />
+
+        <label for="bookingMode">Consultation Mode</label>
+        <select id="bookingMode">
+          <option value="telemedicine">Telemedicine</option>
+          <option value="in-person">In-person</option>
+        </select>
+
+        <label for="bookingReason">Reason for Consultation</label>
+        <textarea id="bookingReason" placeholder="Briefly describe why you want to consult the doctor..." required></textarea>
+
+        <div class="booking-actions">
+          <button type="button" class="booking-cancel" onclick="closeBookingModal()">Cancel</button>
+          <button type="submit" class="booking-submit" id="bookingSubmitButton">Book Appointment</button>
+        </div>
+
+        <div id="bookingMessage" style="text-align:center;margin-top:10px;font-size:12px;"></div>
+      </form>
+    </div>
+  </div>
+
+  <div id="symptomModal" class="symptom-modal" onclick="closeSymptomCheckerOnBackdrop(event)">
+    <div class="symptom-box">
+      <div class="symptom-header">
+        <div>
+          <h2>Symptom Checker</h2>
+          <p>Select your symptoms. This is a screening tool, not a medical diagnosis.</p>
+        </div>
+        <button class="close-symptom" type="button" onclick="closeSymptomChecker()">×</button>
+      </div>
+
+      <form id="symptomForm">
+        <label class="symptom-label">Select your symptoms</label>
+        <div class="symptom-grid">
+          <label class="symptom-option"><input type="checkbox" name="symptom" value="fever"> Fever</label>
+          <label class="symptom-option"><input type="checkbox" name="symptom" value="cough"> Cough</label>
+          <label class="symptom-option"><input type="checkbox" name="symptom" value="headache"> Headache</label>
+          <label class="symptom-option"><input type="checkbox" name="symptom" value="sore throat"> Sore throat</label>
+          <label class="symptom-option"><input type="checkbox" name="symptom" value="runny nose"> Runny nose</label>
+          <label class="symptom-option"><input type="checkbox" name="symptom" value="fatigue"> Fatigue</label>
+          <label class="symptom-option"><input type="checkbox" name="symptom" value="body ache"> Body ache</label>
+          <label class="symptom-option"><input type="checkbox" name="symptom" value="nausea"> Nausea</label>
+          <label class="symptom-option"><input type="checkbox" name="symptom" value="vomiting"> Vomiting</label>
+          <label class="symptom-option"><input type="checkbox" name="symptom" value="diarrhea"> Diarrhea</label>
+          <label class="symptom-option"><input type="checkbox" name="symptom" value="chest pain"> Chest pain</label>
+          <label class="symptom-option"><input type="checkbox" name="symptom" value="difficulty breathing"> Difficulty breathing</label>
+        </div>
+
+        <div class="symptom-fields">
+          <div>
+            <label class="symptom-label" for="symptomDuration">Duration</label>
+            <input type="text" id="symptomDuration" placeholder="e.g. 2 days" required>
+          </div>
+          <div>
+            <label class="symptom-label" for="symptomSeverity">Severity</label>
+            <select id="symptomSeverity" required>
+              <option value="">Select severity</option>
+              <option value="Mild">Mild</option>
+              <option value="Moderate">Moderate</option>
+              <option value="Severe">Severe</option>
+            </select>
+          </div>
+        </div>
+
+        <button id="checkSymptomButton" class="check-symptom-button" type="submit">Check Symptoms</button>
+      </form>
+
+      <div id="symptomResult" class="symptom-result">
+        <h3 class="result-title">Screening Result</h3>
+        <div class="result-row"><strong>Possible conditions:</strong> <span id="possibleConditions"></span></div>
+        <div class="result-row"><strong>Urgency:</strong> <span id="urgencyResult"></span></div>
+        <div class="result-row"><strong>Recommendation:</strong> <span id="recommendationResult"></span></div>
+      </div>
+
+      <div class="history-section">
+        <div class="section-title" style="margin:0 0 10px;">
+          <h3>Recent symptom history</h3>
+          <a onclick="loadSymptomHistory()">Refresh</a>
+        </div>
+        <div id="symptomHistoryList">
+          <p style="color:var(--muted);font-size:12px;">Open the checker to load your history.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Forgot Password Modal -->
+  <div
+    id="forgotPasswordModal"
+    style="
+      display:none;
+      position:fixed;
+      inset:0;
+      z-index:9999;
+      background:rgba(0,0,0,.45);
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+    "
+  >
+    <div
+      style="
+        width:min(420px,100%);
+        background:white;
+        border-radius:18px;
+        padding:24px;
+        box-shadow:0 20px 60px rgba(0,0,0,.2);
+      "
+    >
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <h3 style="margin:0;">Reset Password</h3>
+        <button
+          type="button"
+          onclick="closeForgotPasswordModal()"
+          style="border:0;background:none;font-size:22px;cursor:pointer;"
+        >
+          ×
+        </button>
+      </div>
+
+      <p style="font-size:12px;color:var(--muted);margin:0 0 18px;">
+        Enter your registered email and choose a new password.
+      </p>
+
+      <form id="forgotPasswordForm">
+        <label for="forgotPasswordEmail">Email</label>
+        <input
+          type="email"
+          id="forgotPasswordEmail"
+          placeholder="Enter your registered email"
+          autocomplete="email"
+          required
+          style="width:100%;box-sizing:border-box;margin-bottom:12px;"
+        />
+
+        <label for="newPassword">New Password</label>
+        <input
+          type="password"
+          id="newPassword"
+          placeholder="Enter new password"
+          autocomplete="new-password"
+          minlength="6"
+          required
+          style="width:100%;box-sizing:border-box;margin-bottom:12px;"
+        />
+
+        <label for="confirmNewPassword">Confirm New Password</label>
+        <input
+          type="password"
+          id="confirmNewPassword"
+          placeholder="Confirm new password"
+          autocomplete="new-password"
+          minlength="6"
+          required
+          style="width:100%;box-sizing:border-box;margin-bottom:12px;"
+        />
+
+        <div id="forgotPasswordMessage" style="font-size:12px;margin:8px 0;"></div>
+
+        <button
+          id="resetPasswordButton"
+          type="submit"
+          style="
+            width:100%;
+            padding:11px;
+            border:0;
+            border-radius:10px;
+            cursor:pointer;
+            background:var(--green);
+            color:white;
+            font-weight:600;
+          "
+        >
+          Reset Password
+        </button>
+      </form>
+    </div>
+  </div>
+
   <div class="toast" id="toast"></div>
   <script>
     const API_URL = "http://localhost:5000/api";
+
+    // Compatibility layer for older appointment-booking code.
+    // The browser must send appointment data to the Express backend;
+    // it must NOT try to call MongoDB/Mongoose directly.
+    window.Appointment = window.Appointment || {};
+    window.Appointment.create = async function (payload = {}) {
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        throw new Error("Please login first");
+      }
+
+      const doctorId = payload.doctorId || payload.doctor || payload.doctor_id;
+      const scheduledAt = payload.scheduledAt || payload.date || payload.appointmentDate;
+      const reason = (payload.reason || payload.symptoms || "").toString().trim();
+      const mode = payload.mode || "telemedicine";
+
+      if (!doctorId) {
+        throw new Error("Doctor is required");
+      }
+      if (!scheduledAt) {
+        throw new Error("Appointment date/time is required");
+      }
+      if (!reason) {
+        throw new Error("Reason for consultation is required");
+      }
+
+      const response = await fetch(`${API_URL}/appointments`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          doctorId,
+          scheduledAt,
+          reason,
+          mode
+        })
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || "Unable to book appointment");
+      }
+
+      return result;
+    };
+
+    let selectedLoginRole = "patient";
+    let selectedRegisterRole = "patient";
 
     function notify(message) {
       const toast = document.getElementById("toast");
@@ -874,7 +1875,7 @@
       document.querySelector(".app").style.display = "grid";
     }
 
-    async function loginUser(email, password) {
+    async function loginUser(email, password, role) {
       const response = await fetch(`${API_URL}/auth/login`, {
         method: "POST",
         headers: {
@@ -882,7 +1883,8 @@
         },
         body: JSON.stringify({
           email: email,
-          password: password
+          password: password,
+          role: role
         })
       });
 
@@ -896,10 +1898,9 @@
         throw new Error("Login succeeded, but the server did not return a JWT token.");
       }
 
-      // Your backend returns the JWT as result.token
       localStorage.setItem("token", result.token);
+      localStorage.setItem("userRole", role);
 
-      // Your backend returns user information as result.data
       return result;
     }
 
@@ -936,15 +1937,28 @@
 
         console.log("Logged in user:", user);
 
+        currentUser = user;
+
+        // Keep the role from the backend profile in localStorage.
+        if (user.role) {
+          localStorage.setItem("userRole", user.role);
+        }
+
         const welcomeMessage =
           document.getElementById("welcomeMessage");
 
-        if (welcomeMessage && user.name) {
-          welcomeMessage.textContent =
-            `Good morning, ${user.name}.`;
+        if (user.name) {
+          currentUserName = user.name;
+          updateDateAndGreeting();
+        }
+
+        const locationElement = document.querySelector(".location b");
+        if (locationElement && user.location) {
+          locationElement.textContent = user.location;
         }
 
         showDashboard();
+        applyRoleBasedDashboard(user);
 
       } catch (error) {
         console.error("Profile error:", error);
@@ -956,28 +1970,161 @@
 
     function logoutUser() {
       localStorage.removeItem("token");
+      localStorage.removeItem("userRole");
+      currentUser = null;
       showLoginScreen();
 
       document.getElementById("loginForm").reset();
       document.getElementById("loginMessage").textContent = "";
 
+      const symptomForm = document.getElementById("symptomForm");
+      if (symptomForm) symptomForm.reset();
+
+      const symptomText = document.getElementById("symptomText");
+      if (symptomText) symptomText.value = "";
+
+      const symptomResult = document.getElementById("symptomResult");
+      if (symptomResult) symptomResult.classList.remove("show");
+
+      closeSymptomChecker();
       notify("Logged out successfully");
     }
 
+
+    // ==============================
+    // Forgot Password
+    // ==============================
+
+    function openForgotPasswordModal() {
+      const modal = document.getElementById("forgotPasswordModal");
+      const email = document.getElementById("loginEmail")?.value.trim();
+
+      if (email) {
+        document.getElementById("forgotPasswordEmail").value = email;
+      }
+
+      document.getElementById("forgotPasswordMessage").textContent = "";
+      document.getElementById("forgotPasswordModal").style.display = "flex";
+    }
+
+    function closeForgotPasswordModal() {
+      document.getElementById("forgotPasswordModal").style.display = "none";
+      document.getElementById("forgotPasswordForm").reset();
+      document.getElementById("forgotPasswordMessage").textContent = "";
+    }
+
+    async function resetPassword(email, newPassword) {
+      const response = await fetch(`${API_URL}/auth/reset-password`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          email,
+          newPassword
+        })
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || "Unable to reset password");
+      }
+
+      return result;
+    }
+
     function showLoginForm() {
-      document.getElementById("loginForm").style.display = "block";
-      document.getElementById("registerForm").style.display = "none";
+      document.getElementById("loginSection").style.display = "block";
+      document.getElementById("registerSection").style.display = "none";
       document.getElementById("loginTab").classList.add("active");
       document.getElementById("registerTab").classList.remove("active");
       document.getElementById("authSubtitle").textContent = "Welcome back";
+      updateLoginRoleUI();
     }
 
     function showRegisterForm() {
-      document.getElementById("loginForm").style.display = "none";
-      document.getElementById("registerForm").style.display = "block";
+      document.getElementById("loginSection").style.display = "none";
+      document.getElementById("registerSection").style.display = "block";
       document.getElementById("loginTab").classList.remove("active");
       document.getElementById("registerTab").classList.add("active");
       document.getElementById("authSubtitle").textContent = "Create your health account";
+      updateRegisterRoleUI();
+    }
+
+    function selectLoginRole(role) {
+      selectedLoginRole = role;
+      updateLoginRoleUI();
+    }
+
+    function selectRegisterRole(role) {
+      selectedRegisterRole = role;
+      updateRegisterRoleUI();
+    }
+
+    function updateLoginRoleUI() {
+      const patient = document.getElementById("loginPatientRole");
+      const doctor = document.getElementById("loginDoctorRole");
+      const status = document.getElementById("loginRoleStatus");
+      const button = document.getElementById("loginButton");
+
+      patient.classList.toggle("selected", selectedLoginRole === "patient");
+      doctor.classList.toggle("selected", selectedLoginRole === "doctor");
+
+      const label = selectedLoginRole === "patient" ? "Patient" : "Doctor";
+      status.textContent = `Logging in as ${label}`;
+      button.textContent = `Login as ${label}`;
+    }
+
+    function updateRegisterRoleUI() {
+      const patient = document.getElementById("registerPatientRole");
+      const doctor = document.getElementById("registerDoctorRole");
+      const status = document.getElementById("registerRoleStatus");
+      const button = document.getElementById("registerButton");
+
+      const patientFields = document.getElementById("patientRegisterFields");
+      const doctorFields = document.getElementById("doctorRegisterFields");
+
+      patient.classList.toggle("selected", selectedRegisterRole === "patient");
+      doctor.classList.toggle("selected", selectedRegisterRole === "doctor");
+
+      const isPatient = selectedRegisterRole === "patient";
+      const label = isPatient ? "Patient" : "Doctor";
+
+      status.textContent = `Creating a ${label} account`;
+      button.textContent = `Create ${label} Account`;
+
+      patientFields.style.display = isPatient ? "block" : "none";
+      doctorFields.style.display = isPatient ? "none" : "block";
+
+      // Only the selected role's fields should be required.
+      const patientRequiredFields = [
+        "registerAge",
+        "registerGender",
+        "registerLocation",
+        "registerLanguage"
+      ];
+
+      const doctorRequiredFields = [
+        "registerMedicalNumber",
+        "registerSpecialization",
+        "registerQualification",
+        "registerExperience",
+        "registerClinic",
+        "registerDoctorLocation",
+        "registerFee",
+        "registerDoctorLanguage"
+      ];
+
+      patientRequiredFields.forEach((id) => {
+        const field = document.getElementById(id);
+        if (field) field.required = isPatient;
+      });
+
+      doctorRequiredFields.forEach((id) => {
+        const field = document.getElementById(id);
+        if (field) field.required = !isPatient;
+      });
     }
 
     async function registerUser(userData) {
@@ -997,6 +2144,1078 @@
 
       return result;
     }
+
+
+    // ==============================
+    // Dynamic date and greeting
+    // ==============================
+
+    let currentUserName = "";
+
+    function updateDateAndGreeting() {
+      const now = new Date();
+
+      const hour = now.getHours();
+      let greeting;
+
+      if (hour >= 5 && hour < 12) {
+        greeting = "Good morning.";
+      } else if (hour >= 12 && hour < 17) {
+        greeting = "Good afternoon.";
+      } else if (hour >= 17 && hour < 21) {
+        greeting = "Good evening.";
+      } else {
+        greeting = "Good night.";
+      }
+
+      const greetingElement = document.getElementById("welcomeMessage");
+      const dateElement = document.getElementById("todayDate");
+
+      if (greetingElement) {
+        greetingElement.textContent = currentUserName
+          ? `${greeting}, ${currentUserName}.`
+          : greeting;
+      }
+
+      if (dateElement) {
+        dateElement.textContent = now.toLocaleDateString("en-IN", {
+          weekday: "long",
+          day: "numeric",
+          month: "long",
+          year: "numeric"
+        });
+      }
+    }
+
+
+
+    // ==============================
+    // Doctor Directory + Booking
+    // ==============================
+
+    let selectedDoctorIdForBooking = null;
+    let selectedDoctorForBooking = null;
+
+    function renderDoctorCard(doctor) {
+      const doctorId = doctor._id;
+
+      return `
+        <div class="doctor-directory-card">
+          <div class="doctor-directory-avatar">🩺</div>
+
+          <div class="doctor-directory-info">
+            <h4>Dr. ${escapeHtml(doctor.name || "Doctor")}</h4>
+
+            <div class="doctor-specialization">
+              ${escapeHtml(doctor.specialization || "Medical Professional")}
+            </div>
+
+            <div class="doctor-detail">
+              🎓 <strong>Qualification:</strong>
+              ${escapeHtml(doctor.qualification || "Not specified")}
+            </div>
+
+            <div class="doctor-detail">
+              🏥 <strong>Hospital / Clinic:</strong>
+              ${escapeHtml(doctor.hospitalClinicName || "Not specified")}
+            </div>
+
+            <div class="doctor-detail">
+              💼 <strong>Experience:</strong>
+              ${escapeHtml(String(doctor.yearsOfExperience ?? 0))} years
+            </div>
+
+            <div class="doctor-detail">
+              📍 <strong>Location:</strong>
+              ${escapeHtml(doctor.location || "Not specified")}
+            </div>
+
+            <div class="doctor-fee">
+              Consultation Fee: ₹${escapeHtml(String(doctor.consultationFee ?? 0))}
+            </div>
+
+            <button
+              class="book-doctor-button"
+              type="button"
+              onclick="openBookingModal('${doctorId}')">
+              📅 Book Appointment
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    async function loadRegisteredDoctors() {
+      const directory = document.getElementById("doctorDirectory");
+
+      if (!directory) return;
+
+      directory.innerHTML =
+        '<div class="doctor-directory-message">Loading registered doctors...</div>';
+
+      try {
+        const response = await fetch(`${API_URL}/appointments/doctors`, {
+          method: "GET",
+          headers: getAuthHeaders()
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+          throw new Error(result.message || "Unable to load doctors");
+        }
+
+        const doctors = result.data || [];
+
+        if (doctors.length === 0) {
+          directory.innerHTML =
+            '<div class="doctor-directory-message">No registered doctors are available yet.</div>';
+          return;
+        }
+
+        directory.innerHTML = doctors
+          .map(renderDoctorCard)
+          .join("");
+
+      } catch (error) {
+        console.error("Doctor directory error:", error);
+
+        directory.innerHTML =
+          `<div class="doctor-directory-message">${escapeHtml(error.message)}</div>`;
+      }
+    }
+
+    async function openBookingModal(doctorId) {
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        notify("Please login as a patient first");
+        showLoginScreen();
+        return;
+      }
+
+      try {
+        const response = await fetch(`${API_URL}/appointments/doctors`, {
+          headers: getAuthHeaders()
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+          throw new Error(result.message || "Unable to find doctor");
+        }
+
+        const doctor = (result.data || []).find(
+          item => String(item._id) === String(doctorId)
+        );
+
+        if (!doctor) {
+          notify("Doctor not found");
+          return;
+        }
+
+        selectedDoctorIdForBooking = doctor._id;
+        selectedDoctorForBooking = doctor;
+
+        document.getElementById("bookingDoctorSummary").textContent =
+          `Booking with Dr. ${doctor.name} · ${doctor.specialization || "Medical Professional"} · ₹${doctor.consultationFee ?? 0}`;
+
+        const dateInput = document.getElementById("bookingDateTime");
+        const now = new Date();
+        now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+        dateInput.min = now.toISOString().slice(0, 16);
+
+        document.getElementById("bookingReason").value = "";
+        document.getElementById("bookingMode").value = "telemedicine";
+        document.getElementById("bookingMessage").textContent = "";
+
+        document.getElementById("bookingModal").classList.add("show");
+
+      } catch (error) {
+        console.error("Open booking error:", error);
+        notify(error.message);
+      }
+    }
+
+    function closeBookingModal() {
+      const modal = document.getElementById("bookingModal");
+      if (modal) modal.classList.remove("show");
+
+      selectedDoctorIdForBooking = null;
+      selectedDoctorForBooking = null;
+    }
+
+    function closeBookingOnBackdrop(event) {
+      if (event.target.id === "bookingModal") {
+        closeBookingModal();
+      }
+    }
+
+    async function submitAppointmentBooking(event) {
+  event.preventDefault();
+
+  const token = localStorage.getItem("token");
+  const message = document.getElementById("bookingMessage");
+  const button = document.getElementById("bookingSubmitButton");
+
+  if (!token) {
+    notify("Please login first");
+    showLoginScreen();
+    return;
+  }
+
+  if (!selectedDoctorIdForBooking) {
+    notify("Please select a doctor");
+    return;
+  }
+
+  const scheduledAt =
+    document.getElementById("bookingDateTime").value;
+
+  const mode =
+    document.getElementById("bookingMode").value;
+
+  const reason =
+    document.getElementById("bookingReason").value.trim();
+
+  // Validate fields
+  if (!scheduledAt || !reason) {
+    message.textContent =
+      "Please select date/time and enter the reason for consultation.";
+
+    message.style.color = "#c95c4a";
+    return;
+  }
+
+  // Validate future date
+  const selectedDate = new Date(scheduledAt);
+
+  if (
+    Number.isNaN(selectedDate.getTime()) ||
+    selectedDate <= new Date()
+  ) {
+    message.textContent =
+      "Please select a future date and time.";
+
+    message.style.color = "#c95c4a";
+    return;
+  }
+
+  button.disabled = true;
+  button.textContent = "Booking...";
+  message.textContent = "";
+
+  try {
+
+    // ==========================================
+    // SEND APPOINTMENT TO YOUR EXPRESS BACKEND
+    // ==========================================
+
+    const response = await fetch(
+      "http://localhost:5000/api/appointments",
+      {
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+
+        body: JSON.stringify({
+          doctorId: selectedDoctorIdForBooking,
+          scheduledAt: scheduledAt,
+          reason: reason,
+          mode: mode
+        })
+      }
+    );
+
+    const result = await response.json();
+
+    console.log("Appointment API response:", result);
+
+    if (!response.ok) {
+      throw new Error(
+        result.message ||
+        "Unable to book appointment"
+      );
+    }
+
+    // ==========================================
+    // SUCCESS
+    // ==========================================
+
+    message.textContent =
+      "Appointment request sent successfully!";
+
+    message.style.color = "green";
+
+    notify(
+      "Appointment request sent to the doctor"
+    );
+
+    // Refresh patient's appointments
+    await loadPatientAppointments();
+
+    // Close booking window
+    setTimeout(() => {
+      closeBookingModal();
+    }, 800);
+
+  } catch (error) {
+
+    console.error(
+      "Appointment booking error:",
+      error
+    );
+
+    message.textContent =
+      error.message ||
+      "Unable to book appointment.";
+
+    message.style.color =
+      "#c95c4a";
+
+  } finally {
+
+    button.disabled = false;
+
+    button.textContent =
+      "Book Appointment";
+  }
+}
+
+    // ==============================
+    // Appointments
+    // ==============================
+
+    let currentUser = null;
+
+    function getAuthHeaders() {
+      const token = localStorage.getItem("token");
+      return {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      };
+    }
+
+    function formatAppointmentDate(value) {
+      if (!value) return "Date not specified";
+      return new Date(value).toLocaleString("en-IN", {
+        dateStyle: "medium",
+        timeStyle: "short"
+      });
+    }
+
+    function appointmentStatusHtml(status) {
+      const safe = String(status || "requested").toLowerCase();
+      const label = safe.charAt(0).toUpperCase() + safe.slice(1);
+      return `<span class="appointment-status status-${safe}">${label}</span>`;
+    }
+
+    function renderAppointmentCard(item, role) {
+      const date = formatAppointmentDate(item.scheduledAt);
+      const status = String(item.status || "requested").toLowerCase();
+
+      const otherName = role === "doctor"
+        ? (item.patient?.name || "Patient")
+        : (item.doctor?.name || "Doctor");
+
+      const specialization = item.doctor?.specialization
+        ? `Specialization: ${escapeHtml(item.doctor.specialization)}`
+        : "";
+
+      const reason = item.reason
+        ? `Reason: ${escapeHtml(item.reason)}`
+        : "No reason provided";
+
+      let actions = "";
+
+      if (role === "doctor" && status === "requested") {
+        actions = `
+          <div class="appointment-actions">
+            <button class="appointment-action accept"
+              onclick="updateAppointmentStatus('${item._id}', 'accepted')">
+              ✓ Accept
+            </button>
+            <button class="appointment-action reject"
+              onclick="updateAppointmentStatus('${item._id}', 'rejected')">
+              ✕ Reject
+            </button>
+          </div>`;
+      }
+
+      if (role === "doctor" && status === "accepted") {
+        actions = `
+          <div class="appointment-actions">
+            ${
+              item.meetLink
+                ? `
+                  <button
+                    class="appointment-action accept"
+                    onclick="startConsultation('${escapeHtml(item.meetLink)}')"
+                  >
+                    ◉ Start Consultation
+                  </button>
+                `
+                : `
+                  <span style="color:var(--muted);font-size:11px;">
+                    Consultation link is being prepared...
+                  </span>
+                `
+            }
+          </div>`;
+      }
+
+      if (role === "patient" && status === "accepted") {
+        actions = `
+          <div class="appointment-actions">
+            ${
+              item.meetLink
+                ? `
+                  <button
+                    class="appointment-action accept"
+                    onclick="joinConsultation('${escapeHtml(item.meetLink)}')"
+                  >
+                    ◉ Join Consultation
+                  </button>
+                `
+                : `
+                  <span style="color:var(--muted);font-size:11px;">
+                    Consultation link is being prepared...
+                  </span>
+                `
+            }
+          </div>`;
+      }
+
+      return `
+        <div class="appointment-card">
+          <div class="appointment-card-main">
+            <strong>${escapeHtml(otherName)}</strong>
+            ${specialization ? `<span>${specialization}</span>` : ""}
+            <span>📅 ${escapeHtml(date)}</span>
+            <span>💬 ${reason}</span>
+            ${appointmentStatusHtml(status)}
+          </div>
+          ${actions}
+        </div>
+      `;
+    }
+
+    async function loadDoctorAppointments() {
+      const token = localStorage.getItem("token");
+      if (!token) return;
+
+      const pendingList = document.getElementById("doctorPendingList");
+      const acceptedList = document.getElementById("doctorAcceptedList");
+
+      if (!pendingList || !acceptedList) return;
+
+      pendingList.innerHTML = '<div class="empty-appointments">Loading...</div>';
+      acceptedList.innerHTML = '<div class="empty-appointments">Loading...</div>';
+
+      try {
+        const response = await fetch(`${API_URL}/appointments/doctor`, {
+          headers: getAuthHeaders()
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+          throw new Error(result.message || "Unable to load appointments");
+        }
+
+        const appointments = result.data || [];
+
+        const pending = appointments.filter(
+          item => item.status === "requested"
+        );
+
+        const accepted = appointments.filter(
+          item => item.status === "accepted"
+        );
+
+        document.getElementById("pendingAppointmentCount").textContent =
+          pending.length;
+
+        document.getElementById("acceptedAppointmentCount").textContent =
+          accepted.length;
+
+        document.getElementById("totalAppointmentCount").textContent =
+          appointments.length;
+
+        pendingList.innerHTML = pending.length
+          ? pending.map(item => renderAppointmentCard(item, "doctor")).join("")
+          : '<div class="empty-appointments">No pending consultation requests.</div>';
+
+        acceptedList.innerHTML = accepted.length
+          ? accepted.map(item => renderAppointmentCard(item, "doctor")).join("")
+          : '<div class="empty-appointments">No accepted consultations yet.</div>';
+
+      } catch (error) {
+        console.error("Doctor appointments error:", error);
+        pendingList.innerHTML =
+          `<div class="empty-appointments">${escapeHtml(error.message)}</div>`;
+        acceptedList.innerHTML =
+          `<div class="empty-appointments">${escapeHtml(error.message)}</div>`;
+      }
+    }
+
+    function showPatientDashboard() {
+      const dashboard = document.getElementById("patientDashboard");
+      const appointmentsView = document.getElementById("patientAppointmentsView");
+
+      if (dashboard) {
+        // Keep the dashboard visible; hide only the dedicated appointment view.
+        dashboard.querySelector(".welcome").style.display = "flex";
+        dashboard.querySelector(".hero").style.display = "block";
+        dashboard.querySelector(".section-title").style.display = "flex";
+        dashboard.querySelector(".quick-grid").style.display = "grid";
+        dashboard.querySelector(".lower").style.display = "grid";
+
+        const appointmentHeading = dashboard.querySelector(".doctor-section-title");
+        if (appointmentHeading) appointmentHeading.style.display = "flex";
+        const appointmentList = document.getElementById("patientAppointmentList");
+        if (appointmentList) appointmentList.style.display = "grid";
+      }
+
+      if (appointmentsView) appointmentsView.style.display = "none";
+
+      document.querySelectorAll("#patientNav .nav-item").forEach(item => {
+        item.classList.remove("active");
+      });
+
+      const dashboardNav = document.querySelector("#patientNav .nav-item");
+      if (dashboardNav) dashboardNav.classList.add("active");
+    }
+
+    async function openPatientAppointments() {
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        notify("Please login first");
+        showLoginScreen();
+        return;
+      }
+
+      const dashboard = document.getElementById("patientDashboard");
+      const appointmentsView = document.getElementById("patientAppointmentsView");
+
+      if (!appointmentsView) {
+        notify("Appointments page is unavailable");
+        return;
+      }
+
+      // Hide normal patient dashboard sections while the appointment page is open.
+      if (dashboard) {
+        const welcome = dashboard.querySelector(".welcome");
+        const hero = dashboard.querySelector(".hero");
+        const sectionTitle = dashboard.querySelector(".section-title");
+        const quickGrid = dashboard.querySelector(".quick-grid");
+        const lower = dashboard.querySelector(".lower");
+
+        if (welcome) welcome.style.display = "none";
+        if (hero) hero.style.display = "none";
+        if (sectionTitle) sectionTitle.style.display = "none";
+        if (quickGrid) quickGrid.style.display = "none";
+        if (lower) lower.style.display = "none";
+
+        const appointmentHeading = dashboard.querySelector(".doctor-section-title");
+        if (appointmentHeading) appointmentHeading.style.display = "none";
+
+        const appointmentList = document.getElementById("patientAppointmentList");
+        if (appointmentList) appointmentList.style.display = "none";
+      }
+
+      appointmentsView.style.display = "block";
+
+      // Show all registered doctors in the Patient Appointments section.
+      loadRegisteredDoctors();
+
+      document.querySelectorAll("#patientNav .nav-item").forEach(item => {
+        item.classList.remove("active");
+      });
+
+      const nav = document.getElementById("patientAppointmentsNav");
+      if (nav) nav.classList.add("active");
+
+      await loadPatientAppointments();
+    }
+
+    async function loadPatientAppointments() {
+      const token = localStorage.getItem("token");
+      if (!token) return;
+
+      const list = document.getElementById("patientAppointmentList");
+      const upcoming = document.getElementById("patientUpcomingAppointment");
+
+      if (!list) return;
+
+      list.innerHTML = '<div class="empty-appointments">Loading...</div>';
+
+      try {
+        const response = await fetch(`${API_URL}/appointments/patient`, {
+          headers: getAuthHeaders()
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+          throw new Error(result.message || "Unable to load appointments");
+        }
+
+        const appointments = result.data || [];
+
+        const renderedAppointments = appointments.length
+          ? appointments.map(item => renderAppointmentCard(item, "patient")).join("")
+          : '<div class="empty-appointments">You do not have any appointments yet.</div>';
+
+        list.innerHTML = renderedAppointments;
+
+        const allAppointmentsView = document.getElementById("patientAppointmentsAll");
+        if (allAppointmentsView) {
+          allAppointmentsView.innerHTML = renderedAppointments;
+        }
+
+        const accepted = appointments.find(
+          item => item.status === "accepted"
+        );
+
+        const upcomingHtml = accepted
+          ? renderAppointmentCard(accepted, "patient")
+          : '<div class="empty-appointments">No confirmed upcoming appointment.</div>';
+
+        if (upcoming) {
+          upcoming.innerHTML = upcomingHtml;
+        }
+
+        const dedicatedUpcoming = document.getElementById("patientAppointmentsUpcoming");
+        if (dedicatedUpcoming) {
+          dedicatedUpcoming.innerHTML = upcomingHtml;
+        }
+
+      } catch (error) {
+        console.error("Patient appointments error:", error);
+        list.innerHTML =
+          `<div class="empty-appointments">${escapeHtml(error.message)}</div>`;
+      }
+    }
+
+    async function updateAppointmentStatus(appointmentId, status) {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        notify("Please login first");
+        return;
+      }
+
+      const action = status === "accepted" ? "accept" : "reject";
+
+      if (!confirm(`Are you sure you want to ${action} this consultation?`)) {
+        return;
+      }
+
+      try {
+        const response = await fetch(
+          `${API_URL}/appointments/${appointmentId}/status`,
+          {
+            method: "PATCH",
+            headers: getAuthHeaders(),
+            body: JSON.stringify({ status })
+          }
+        );
+
+        const result = await response.json();
+
+        if (!response.ok) {
+          throw new Error(result.message || `Unable to ${action} consultation`);
+        }
+
+        notify(
+          status === "accepted"
+            ? "Consultation accepted successfully"
+            : "Consultation rejected"
+        );
+
+        await loadDoctorAppointments();
+
+      } catch (error) {
+        console.error("Appointment status error:", error);
+        notify(error.message);
+      }
+    }
+
+
+    // ==============================
+    // Jitsi Telemedicine
+    // ==============================
+
+    function openJitsiConsultation(meetLink, label) {
+      if (!meetLink) {
+        notify("Consultation link is not available yet.");
+        return;
+      }
+
+      if (!String(meetLink).startsWith("https://meet.jit.si/")) {
+        notify("Invalid consultation link.");
+        return;
+      }
+
+      window.open(
+        meetLink,
+        "_blank",
+        "noopener,noreferrer"
+      );
+    }
+
+    function startConsultation(meetLink) {
+      openJitsiConsultation(meetLink, "Start Consultation");
+    }
+
+    function joinConsultation(meetLink) {
+      openJitsiConsultation(meetLink, "Join Consultation");
+    }
+
+    function applyRoleBasedDashboard(user) {
+      currentUser = user;
+
+      const role = user.role || localStorage.getItem("userRole");
+
+      const patientDashboard = document.getElementById("patientDashboard");
+      const doctorDashboard = document.getElementById("doctorDashboard");
+      const patientNav = document.getElementById("patientNav");
+      const doctorNav = document.getElementById("doctorNav");
+
+      if (role === "doctor") {
+        patientDashboard.style.display = "none";
+        doctorDashboard.style.display = "block";
+
+        patientNav.style.display = "none";
+        doctorNav.style.display = "block";
+
+        document.getElementById("doctorWelcomeMessage").textContent =
+          `Welcome, Dr. ${user.name || "Doctor"}.`;
+
+        document.getElementById("doctorTodayDate").textContent =
+          new Date().toLocaleDateString("en-IN", {
+            weekday: "long",
+            day: "numeric",
+            month: "long",
+            year: "numeric"
+          });
+
+        const profileStrip = document.getElementById("doctorProfileStrip");
+
+        profileStrip.innerHTML = `
+          <strong>Doctor profile:</strong>
+          ${escapeHtml(user.specialization || "Medical Professional")}
+          · ${escapeHtml(user.qualification || "")}
+          · ${escapeHtml(String(user.yearsOfExperience ?? 0))} years experience
+          · ${escapeHtml(user.hospitalClinicName || "Clinic not specified")}
+        `;
+
+        loadDoctorAppointments();
+
+      } else {
+        patientDashboard.style.display = "block";
+        doctorDashboard.style.display = "none";
+
+        patientNav.style.display = "block";
+        doctorNav.style.display = "none";
+
+        loadPatientAppointments();
+      }
+    }
+
+    // ==============================
+    // Symptom Checker
+    // ==============================
+
+    function resetSymptomCheckerForm() {
+      const form = document.getElementById("symptomForm");
+      const result = document.getElementById("symptomResult");
+      const button = document.getElementById("checkSymptomButton");
+
+      if (form) {
+        form.reset();
+      }
+
+      if (result) {
+        result.classList.remove("show");
+      }
+
+      const possibleConditions = document.getElementById("possibleConditions");
+      const urgencyResult = document.getElementById("urgencyResult");
+      const recommendationResult = document.getElementById("recommendationResult");
+
+      if (possibleConditions) {
+        possibleConditions.textContent = "";
+      }
+
+      if (urgencyResult) {
+        urgencyResult.textContent = "";
+        urgencyResult.className = "urgency";
+      }
+
+      if (recommendationResult) {
+        recommendationResult.textContent = "";
+      }
+
+      if (button) {
+        button.disabled = false;
+        button.textContent = "Check Symptoms";
+      }
+    }
+
+    function openSymptomChecker() {
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        notify("Please login first");
+        showLoginScreen();
+        return;
+      }
+
+      // Always start with a fresh symptom form.
+      resetSymptomCheckerForm();
+
+      document.getElementById("symptomModal").classList.add("show");
+      loadSymptomHistory();
+    }
+
+    function closeSymptomChecker() {
+      // Clear the current form/result when the modal is closed.
+      resetSymptomCheckerForm();
+      document.getElementById("symptomModal").classList.remove("show");
+    }
+
+    function closeSymptomCheckerOnBackdrop(event) {
+      if (event.target.id === "symptomModal") {
+        closeSymptomChecker();
+      }
+    }
+
+    function getSelectedSymptoms() {
+      return Array.from(
+        document.querySelectorAll('input[name="symptom"]:checked')
+      ).map((checkbox) => checkbox.value);
+    }
+
+    async function checkSymptoms(symptoms, duration, severity) {
+      const token = localStorage.getItem("token");
+
+      if (!token) throw new Error("Please login first.");
+
+      const response = await fetch(`${API_URL}/symptoms/check`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({ symptoms, duration, severity })
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        if (response.status === 401) {
+          localStorage.removeItem("token");
+          showLoginScreen();
+        }
+        throw new Error(result.message || "Symptom check failed");
+      }
+
+      return result;
+    }
+
+    async function loadSymptomHistory() {
+      const token = localStorage.getItem("token");
+      const historyList = document.getElementById("symptomHistoryList");
+
+      if (!token) return;
+
+      historyList.innerHTML =
+        '<p style="color:var(--muted);font-size:12px;">Loading history...</p>';
+
+      try {
+        const response = await fetch(`${API_URL}/symptoms/history`, {
+          method: "GET",
+          headers: { "Authorization": `Bearer ${token}` }
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+          throw new Error(result.message || "Could not load symptom history");
+        }
+
+        if (!result.data || result.data.length === 0) {
+          historyList.innerHTML =
+            '<p style="color:var(--muted);font-size:12px;">No symptom history yet.</p>';
+          return;
+        }
+
+        historyList.innerHTML = result.data.slice(0, 5).map((item) => {
+          const date = item.createdAt
+            ? new Date(item.createdAt).toLocaleString()
+            : "";
+
+          const conditions =
+            item.result?.possibleConditions?.join(", ") ||
+            "No specific condition identified";
+
+          return `
+            <div class="history-item">
+              <strong>${escapeHtml(item.symptoms.join(", "))}</strong>
+              <div>Duration: ${escapeHtml(item.duration)}</div>
+              <div>Severity: ${escapeHtml(item.severity)}</div>
+              <div>Possible conditions: ${escapeHtml(conditions)}</div>
+              <div>Urgency: ${escapeHtml(item.result?.urgency || "")}</div>
+              <div style="color:var(--muted);margin-top:4px;">${escapeHtml(date)}</div>
+            </div>
+          `;
+        }).join("");
+
+      } catch (error) {
+        console.error("Symptom history error:", error);
+        historyList.innerHTML =
+          `<p style="color:#c95c4a;font-size:12px;">${escapeHtml(error.message)}</p>`;
+      }
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    document.getElementById("symptomForm").addEventListener("submit", async function(event) {
+      event.preventDefault();
+
+      const symptoms = getSelectedSymptoms();
+      const duration = document.getElementById("symptomDuration").value.trim();
+      const severity = document.getElementById("symptomSeverity").value;
+      const button = document.getElementById("checkSymptomButton");
+
+      if (symptoms.length === 0) {
+        notify("Please select at least one symptom");
+        return;
+      }
+
+      if (!duration) {
+        notify("Please provide symptom duration");
+        return;
+      }
+
+      if (!severity) {
+        notify("Please select severity");
+        return;
+      }
+
+      button.disabled = true;
+      button.textContent = "Checking...";
+
+      try {
+        const result = await checkSymptoms(symptoms, duration, severity);
+        const screening = result.data?.result;
+
+        if (!screening) {
+          throw new Error("Invalid response received from the symptom checker.");
+        }
+
+        const possibleConditions = Array.isArray(screening.possibleConditions) ? screening.possibleConditions : [];
+        document.getElementById("possibleConditions").textContent = possibleConditions.length ? possibleConditions.join(", ") : "No specific condition identified";
+
+        const urgencyElement = document.getElementById("urgencyResult");
+        const urgency = screening.urgency || "Moderate";
+        urgencyElement.textContent = urgency;
+        urgencyElement.className = "urgency urgency-" + String(urgency).toLowerCase();
+
+        document.getElementById("recommendationResult").textContent = screening.recommendation || "Please consult a qualified healthcare professional.";
+
+        document.getElementById("symptomResult").classList.add("show");
+
+        notify("Symptom check completed");
+        await loadSymptomHistory();
+
+      } catch (error) {
+        console.error("Symptom check error:", error);
+        notify(error.message);
+      } finally {
+        button.disabled = false;
+        button.textContent = "Check Symptoms";
+      }
+    });
+
+    document
+      .getElementById("bookingForm")
+      .addEventListener("submit", submitAppointmentBooking);
+
+
+    document
+      .getElementById("forgotPasswordForm")
+      .addEventListener("submit", async function (event) {
+
+        event.preventDefault();
+
+        const email =
+          document.getElementById("forgotPasswordEmail").value.trim();
+
+        const newPassword =
+          document.getElementById("newPassword").value;
+
+        const confirmNewPassword =
+          document.getElementById("confirmNewPassword").value;
+
+        const message =
+          document.getElementById("forgotPasswordMessage");
+
+        const button =
+          document.getElementById("resetPasswordButton");
+
+        if (newPassword !== confirmNewPassword) {
+          message.textContent = "Passwords do not match.";
+          message.style.color = "#c95c4a";
+          return;
+        }
+
+        if (newPassword.length < 6) {
+          message.textContent = "Password must be at least 6 characters.";
+          message.style.color = "#c95c4a";
+          return;
+        }
+
+        button.disabled = true;
+        button.textContent = "Resetting...";
+        message.textContent = "";
+
+        try {
+          await resetPassword(email, newPassword);
+
+          message.textContent =
+            "Password reset successfully. You can now login.";
+          message.style.color = "green";
+
+          notify("Password reset successfully");
+
+          setTimeout(() => {
+            closeForgotPasswordModal();
+            document.getElementById("loginEmail").value = email;
+            document.getElementById("loginPassword").value = "";
+          }, 900);
+
+        } catch (error) {
+          console.error("Reset password error:", error);
+          message.textContent = error.message;
+          message.style.color = "#c95c4a";
+        } finally {
+          button.disabled = false;
+          button.textContent = "Reset Password";
+        }
+      });
 
     document
       .getElementById("loginForm")
@@ -1023,7 +3242,7 @@
         button.textContent = "Logging in...";
 
         try {
-          await loginUser(email, password);
+          await loginUser(email, password, selectedLoginRole);
 
           message.textContent = "Login successful!";
           message.style.color = "green";
@@ -1056,13 +3275,38 @@
           email: document.getElementById("registerEmail").value.trim(),
           password: document.getElementById("registerPassword").value,
           phone: document.getElementById("registerPhone").value.trim(),
-          age: document.getElementById("registerAge").value
-            ? Number(document.getElementById("registerAge").value)
-            : undefined,
-          gender: document.getElementById("registerGender").value,
-          location: document.getElementById("registerLocation").value.trim(),
-          preferredLanguage: document.getElementById("registerLanguage").value.trim()
+          role: selectedRegisterRole
         };
+
+        if (selectedRegisterRole === "patient") {
+          userData.age = document.getElementById("registerAge").value
+            ? Number(document.getElementById("registerAge").value)
+            : undefined;
+          userData.gender = document.getElementById("registerGender").value;
+          userData.location = document.getElementById("registerLocation").value.trim();
+          userData.preferredLanguage = document.getElementById("registerLanguage").value.trim();
+        } else {
+          userData.medicalRegistrationNumber =
+            document.getElementById("registerMedicalNumber").value.trim();
+          userData.specialization =
+            document.getElementById("registerSpecialization").value;
+          userData.qualification =
+            document.getElementById("registerQualification").value.trim();
+          userData.yearsOfExperience =
+            document.getElementById("registerExperience").value
+              ? Number(document.getElementById("registerExperience").value)
+              : undefined;
+          userData.hospitalClinicName =
+            document.getElementById("registerClinic").value.trim();
+          userData.location =
+            document.getElementById("registerDoctorLocation").value.trim();
+          userData.consultationFee =
+            document.getElementById("registerFee").value
+              ? Number(document.getElementById("registerFee").value)
+              : undefined;
+          userData.preferredLanguage =
+            document.getElementById("registerDoctorLanguage").value.trim();
+        }
 
         Object.keys(userData).forEach((key) => {
           if (userData[key] === "" || userData[key] === undefined) {
@@ -1098,9 +3342,19 @@
 
         } finally {
           button.disabled = false;
-          button.textContent = "Create Account";
+          updateRegisterRoleUI();
         }
       });
+
+    // Initialize authentication role selectors.
+    updateLoginRoleUI();
+    updateRegisterRoleUI();
+
+    // Update greeting and date whenever the page opens.
+    updateDateAndGreeting();
+
+    // Keep the greeting/date current if the page stays open for a long time.
+    setInterval(updateDateAndGreeting, 60000);
 
     // Check authentication whenever the single HTML page opens.
     loadProfile();

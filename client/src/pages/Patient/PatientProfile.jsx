@@ -136,12 +136,21 @@ function PatientProfile() {
           </div>
         </div>
 
-        <Link
-          to={`/patients/${patientId}/appointments`}
-          className="primary-button"
-        >
-          My Appointments
-        </Link>
+        <div style={{ display: "flex", gap: "1rem", marginTop: "1rem" }}>
+          <Link
+            to={`/patients/${patientId}/appointments`}
+            className="primary-button"
+          >
+            My Appointments
+          </Link>
+          <Link
+            to={`/patients/${patientId}/medicines`}
+            className="primary-button"
+            style={{ backgroundColor: "#28a745" }}
+          >
+            Medicine Reminders
+          </Link>
+        </div>
       </div>
     </div>
   );

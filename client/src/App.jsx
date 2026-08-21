@@ -16,6 +16,7 @@ import Notification from "./pages/Doctor/Notification";
 import PatientRegister from "./pages/Patient/PatientRegister";
 import PatientProfile from "./pages/Patient/PatientProfile";
 import MyAppointments from "./pages/Patient/MyAppointments";
+import PatientMedicine from "./pages/Patient/PatientMedicine";
 
 // Appointment Booking
 import BookAppointment from "./pages/Appointment/BookAppointment";
@@ -42,6 +43,7 @@ function App() {
         <Route path="/patients/register" element={<PatientRegister />} />
         <Route path="/patients/:patientId" element={<PatientProfile />} />
         <Route path="/patients/:patientId/appointments" element={<MyAppointments />} />
+        <Route path="/patients/:patientId/medicines" element={<PatientMedicine />} />
 
         {/* Step 3: Appointment Booking */}
         <Route
