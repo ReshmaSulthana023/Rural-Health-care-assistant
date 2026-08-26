@@ -136,7 +136,7 @@ function PatientProfile() {
           </div>
         </div>
 
-        <div style={{ display: "flex", gap: "1rem", marginTop: "1rem" }}>
+        <div style={{ display: "flex", gap: "1rem", marginTop: "1rem", flexWrap: "wrap", justifyContent: "center" }}>
           <Link
             to={`/patients/${patientId}/appointments`}
             className="primary-button"
@@ -149,6 +149,13 @@ function PatientProfile() {
             style={{ backgroundColor: "#28a745" }}
           >
             Medicine Reminders
+          </Link>
+          <Link
+            to={`/patients/${patientId}/health-records`}
+            className="primary-button"
+            style={{ backgroundColor: "#0f7668" }}
+          >
+            Health Records 📁
           </Link>
         </div>
       </div>

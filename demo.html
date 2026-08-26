@@ -40,6 +40,8 @@
       background: #fffdf8;
       border-right: 1px solid var(--line);
       padding: 30px 17px;
+      position: relative;
+      z-index: 60;
       display: flex;
       flex-direction: column;
     }
@@ -191,6 +193,7 @@
       place-items: end center;
       overflow: hidden;
       font-size: 25px;
+      cursor: pointer;
     }
 
     .welcome {
@@ -1243,6 +1246,137 @@
     .history-section{margin-top:25px;border-top:1px solid var(--line);padding-top:20px}
     .history-item{padding:12px;border:1px solid var(--line);border-radius:10px;margin-top:9px;background:white;font-size:12px}
     .history-item strong{display:block;margin-bottom:4px}
+    /* General Modals (Medicine Reminders, Health Records, Disclaimer) */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(22, 48, 43, 0.42);
+      z-index: 50;
+      padding: 20px;
+      overflow-y: auto;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal.show {
+      display: flex !important;
+    }
+
+    .modal-card {
+      background: white;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+    }
+    .medicine-page-modal {
+      background: var(--cream);
+      padding: 0;
+      left: max(255px, calc((100vw - 1440px) / 2 + 255px));
+      align-items: stretch;
+      justify-content: stretch;
+    }
+    .medicine-page-modal .medicine-page-card {
+      background: var(--cream);
+      width: 100%;
+      max-width: none;
+      max-height: none;
+      min-height: 100vh;
+      overflow-y: auto;
+      border: 0;
+      border-radius: 0;
+      box-shadow: none;
+      padding: 32px clamp(20px, 6vw, 88px);
+    }
+    .symptom-page-modal {
+      background: var(--cream);
+      padding: 0;
+      left: max(255px, calc((100vw - 1440px) / 2 + 255px));
+      align-items: stretch;
+      justify-content: stretch;
+      overflow-y: auto;
+    }
+    .symptom-page-modal .symptom-page-box {
+      width: 100%;
+      max-width: none;
+      max-height: none;
+      min-height: 100vh;
+      overflow-y: auto;
+      border: 0;
+      border-radius: 0;
+      box-shadow: none;
+      padding: 32px clamp(20px, 6vw, 88px);
+    }
+    .health-records-page-modal {
+      background: var(--cream);
+      padding: 0;
+      left: max(255px, calc((100vw - 1440px) / 2 + 255px));
+      align-items: stretch;
+      justify-content: stretch;
+      overflow-y: auto;
+    }
+    .health-records-page-modal .health-records-page-card {
+      background: var(--cream);
+      width: 100%;
+      max-width: none;
+      max-height: none;
+      min-height: 100vh;
+      overflow-y: auto;
+      border: 0;
+      border-radius: 0;
+      box-shadow: none;
+      padding: 32px clamp(20px, 6vw, 88px);
+    }
+    .profile-page {
+      display: none;
+      min-height: 100vh;
+      padding: 32px clamp(20px, 6vw, 88px);
+    }
+    .profile-page-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .profile-page-header h1 {
+      margin: 5px 0 0;
+      font-family: Georgia, serif;
+      font-size: 30px;
+    }
+    .profile-details-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .profile-detail {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 17px;
+    }
+    .profile-detail span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 6px;
+    }
+    .profile-detail strong { font-size: 15px; }
+    .profile-consultation-count {
+      margin-bottom: 20px;
+      background: var(--green);
+      color: white;
+      border-radius: 16px;
+      padding: 22px;
+    }
+    .profile-consultation-count span { display:block; color:#daf2ed; font-size:13px; }
+    .profile-consultation-count strong { display:block; margin-top:6px; font-size:34px; }
+    @media(max-width:600px){.profile-details-grid{grid-template-columns:1fr}.profile-page-header{align-items:flex-start;flex-direction:column}}
+    @media(max-width:900px){
+      .medicine-page-modal,
+      .symptom-page-modal,
+      .health-records-page-modal { left: 0; }
+    }
     @media(max-width:600px){.symptom-grid{grid-template-columns:1fr 1fr}.symptom-fields{grid-template-columns:1fr}.symptom-box{padding:20px}}
 
   </style>
@@ -1419,21 +1553,19 @@
       </div>
       <nav>
         <div id="patientNav">
-          <a class="nav-item active"><span>⌂</span>Dashboard</a>
+          <a class="nav-item active" onclick="showPatientDashboard()"><span>⌂</span>Dashboard</a>
           <a class="nav-item" onclick="openSymptomChecker()"><span>♡</span>Symptom Checker</a>
           <a class="nav-item" id="patientAppointmentsNav" onclick="openPatientAppointments()"><span>▣</span>Appointments</a>
-          <a class="nav-item" onclick="openPatientAppointments()"><span>◉</span>Telemedicine</a>
-          <a class="nav-item"><span>◷</span>Medicine Reminders</a>
-          <a class="nav-item"><span>▤</span>Health Records</a>
+          <a class="nav-item" id="patientTelemedicineNav" onclick="openTelemedicine()"><span>◉</span>Telemedicine</a>
+          <a class="nav-item" onclick="openMedicineReminders()"><span>◷</span>Medicine Reminders</a>
+          <a class="nav-item" id="patientHealthRecordsNav" onclick="openHealthRecords()"><span>▤</span>Health Records</a>
         </div>
 
         <div id="doctorNav" style="display:none;">
-          <a class="nav-item active"><span>⌂</span>Doctor Dashboard</a>
-          <a class="nav-item" onclick="loadDoctorAppointments()"><span>▣</span>Appointments</a>
-          <a class="nav-item"><span>◉</span>Telemedicine</a>
-          <a class="nav-item"><span>👥</span>My Patients</a>
-          <a class="nav-item"><span>▤</span>Patient Records</a>
-          <a class="nav-item"><span>◉</span>Doctor Profile</a>
+          <a class="nav-item active" onclick="showDoctorDashboard()"><span>⌂</span>Doctor Dashboard</a>
+          <a class="nav-item" id="doctorAppointmentsNav" onclick="openDoctorAppointments()"><span>▣</span>Appointments</a>
+          <a class="nav-item" id="doctorPatientsNav" onclick="openDoctorPatients()"><span>👥</span>My Patients</a>
+          <a class="nav-item" id="doctorProfileNav" onclick="openUserProfile()"><span>◉</span>Doctor Profile</a>
         </div>
       </nav>
       <div class="help"><strong>Need urgent help?</strong>For a medical emergency, call your local emergency service
@@ -1445,7 +1577,7 @@
         <div class="location">⌖ <b>Chandrapur, Maharashtra</b> · Connected</div>
         <div class="profile">
           <div class="bell">♧<i class="dot"></i></div>
-          <div class="avatar" id="profileAvatar">👩🏽</div>
+          <div class="avatar" id="profileAvatar" role="button" tabindex="0" aria-label="Open profile" onclick="openUserProfile()" onkeydown="if(event.key === 'Enter' || event.key === ' ') openUserProfile()">👩🏽</div>
           <button class="logout-button" type="button" onclick="logoutUser()">Logout</button>
         </div>
       </div>
@@ -1455,6 +1587,7 @@
         <section class="welcome">
           <div>
             <div class="eyebrow">Your health companion</div>
+
             <h1 id="welcomeMessage">Good morning.</h1>
           </div>
           <div class="today" id="todayDate">Loading date...</div>
@@ -1490,7 +1623,7 @@
             <h4>Talk to a doctor</h4>
             <p>Connect online from the comfort of home</p>
           </article>
-          <article class="quick" onclick="notify('Medicine reminders opened')">
+          <article class="quick" onclick="openMedicineReminders()">
             <div class="quick-icon">◷</div>
             <h4>Medicine reminders</h4>
             <p>Stay on track with your treatment</p>
@@ -1531,7 +1664,16 @@
             <button type="button" onclick="showPatientDashboard()">← Dashboard</button>
           </div>
 
-          <div class="panel" style="margin-bottom:18px;">
+          <div class="doctor-section-title">
+            <h3>Available Doctors</h3>
+            <button type="button" onclick="loadRegisteredDoctors()">Refresh</button>
+          </div>
+
+          <div id="doctorDirectory" class="doctor-directory">
+            <div class="doctor-directory-message">Loading registered doctors...</div>
+          </div>
+
+          <div class="panel" style="margin-top:30px;margin-bottom:18px;">
             <h3>Upcoming Appointment</h3>
             <div id="patientAppointmentsUpcoming">
               <div class="empty-appointments">No confirmed upcoming appointment.</div>
@@ -1544,17 +1686,73 @@
               <div class="empty-appointments">Loading appointments...</div>
             </div>
           </div>
+        </section>
 
+        <section id="patientTelemedicineView" style="display:none; margin-top:30px;">
           <div class="doctor-section-title">
-            <h3>Available Doctors</h3>
-            <button type="button" onclick="loadRegisteredDoctors()">Refresh</button>
+            <h3>Telemedicine Consultations</h3>
+            <button type="button" onclick="showPatientDashboard()">← Dashboard</button>
           </div>
 
-          <div id="doctorDirectory" class="doctor-directory">
-            <div class="doctor-directory-message">Loading registered doctors...</div>
+          <div class="panel" style="margin-bottom:18px;">
+            <h3>How to join</h3>
+            <p style="margin:0;color:var(--muted);font-size:13px;line-height:1.5;">
+              Your doctor must accept the appointment before a secure Jitsi meeting link is created.
+              Join at the scheduled time using the button on your consultation.
+            </p>
+          </div>
+
+          <div class="panel">
+            <h3>My Online Consultations</h3>
+            <div id="patientTelemedicineList" class="appointment-list">
+              <div class="empty-appointments">Loading consultations...</div>
+            </div>
           </div>
         </section>
       </div>
+
+      <section id="userProfilePage" class="profile-page">
+        <div class="profile-page-header">
+          <div>
+            <div class="eyebrow">Account profile</div>
+            <h1 id="profilePageTitle">My Profile</h1>
+          </div>
+          <div style="display:flex;gap:8px;">
+            <button id="editProfileButton" type="button" class="logout-button" onclick="startEditProfile()">Edit profile</button>
+            <button type="button" class="logout-button" onclick="closeUserProfile()">← Dashboard</button>
+          </div>
+        </div>
+        <div id="profileTelemedicineCount" class="profile-consultation-count">
+          <span>Completed telemedicine consultations</span>
+          <strong>Loading...</strong>
+        </div>
+        <div class="panel">
+          <h3>Personal details</h3>
+          <div id="profileDetailsGrid" class="profile-details-grid">
+            <div class="empty-appointments">Loading profile...</div>
+          </div>
+          <form id="profileEditForm" onsubmit="saveUserProfile(event)" style="display:none;margin-top:20px;border-top:1px solid var(--line);padding-top:18px;">
+            <div class="profile-details-grid">
+              <label class="profile-detail">Full name<input id="profileEditName" required style="display:block;width:100%;margin-top:7px;padding:9px;border:1px solid var(--line);border-radius:8px;"></label>
+              <label class="profile-detail">Phone<input id="profileEditPhone" style="display:block;width:100%;margin-top:7px;padding:9px;border:1px solid var(--line);border-radius:8px;"></label>
+              <label class="profile-detail">Location<input id="profileEditLocation" style="display:block;width:100%;margin-top:7px;padding:9px;border:1px solid var(--line);border-radius:8px;"></label>
+              <label class="profile-detail">Preferred language<input id="profileEditLanguage" style="display:block;width:100%;margin-top:7px;padding:9px;border:1px solid var(--line);border-radius:8px;"></label>
+              <label class="profile-detail patient-profile-field">Age<input id="profileEditAge" type="number" min="0" style="display:block;width:100%;margin-top:7px;padding:9px;border:1px solid var(--line);border-radius:8px;"></label>
+              <label class="profile-detail patient-profile-field">Gender<select id="profileEditGender" style="display:block;width:100%;margin-top:7px;padding:9px;border:1px solid var(--line);border-radius:8px;"><option value="">Select gender</option><option>Male</option><option>Female</option><option>Other</option></select></label>
+              <label class="profile-detail doctor-profile-field">Specialization<input id="profileEditSpecialization" style="display:block;width:100%;margin-top:7px;padding:9px;border:1px solid var(--line);border-radius:8px;"></label>
+              <label class="profile-detail doctor-profile-field">Qualification<input id="profileEditQualification" style="display:block;width:100%;margin-top:7px;padding:9px;border:1px solid var(--line);border-radius:8px;"></label>
+              <label class="profile-detail doctor-profile-field">Years of experience<input id="profileEditExperience" type="number" min="0" style="display:block;width:100%;margin-top:7px;padding:9px;border:1px solid var(--line);border-radius:8px;"></label>
+              <label class="profile-detail doctor-profile-field">Hospital / clinic<input id="profileEditClinic" style="display:block;width:100%;margin-top:7px;padding:9px;border:1px solid var(--line);border-radius:8px;"></label>
+              <label class="profile-detail doctor-profile-field">Consultation fee<input id="profileEditFee" type="number" min="0" style="display:block;width:100%;margin-top:7px;padding:9px;border:1px solid var(--line);border-radius:8px;"></label>
+            </div>
+            <div style="display:flex;gap:8px;margin-top:16px;">
+              <button type="button" class="logout-button" onclick="cancelEditProfile()">Cancel</button>
+              <button type="submit" class="book-doctor-button" style="margin-top:0;">Save profile</button>
+            </div>
+            <div id="profileEditMessage" style="margin-top:10px;font-size:12px;"></div>
+          </form>
+        </div>
+      </section>
 
       <!-- ================= DOCTOR DASHBOARD ================= -->
       <div id="doctorDashboard" class="doctor-dashboard">
@@ -1605,6 +1803,50 @@
           <strong>Doctor profile:</strong> Loading...
         </div>
       </div>
+
+      <section id="doctorPatientsView" class="profile-page">
+        <div class="profile-page-header">
+          <div>
+            <div class="eyebrow">Doctor workspace</div>
+            <h1>My Patients</h1>
+          </div>
+          <div style="display:flex;gap:8px;">
+            <button type="button" class="logout-button" onclick="loadDoctorPatients()">Refresh</button>
+            <button type="button" class="logout-button" onclick="showDoctorDashboard()">← Dashboard</button>
+          </div>
+        </div>
+        <div class="panel">
+          <h3>Patients who booked consultations</h3>
+          <div id="doctorPatientsList" class="doctor-directory">
+            <div class="empty-appointments">Loading patients...</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="doctorAppointmentsView" class="profile-page">
+        <div class="profile-page-header">
+          <div>
+            <div class="eyebrow">Doctor workspace</div>
+            <h1>Appointments</h1>
+          </div>
+          <div style="display:flex;gap:8px;">
+            <button type="button" class="logout-button" onclick="loadDoctorAppointmentPage()">Refresh</button>
+            <button type="button" class="logout-button" onclick="showDoctorDashboard()">← Dashboard</button>
+          </div>
+        </div>
+        <div class="panel" style="margin-bottom:20px;">
+          <h3>Consultation requests</h3>
+          <div id="doctorAppointmentsPendingPage" class="appointment-list">
+            <div class="empty-appointments">Loading appointments...</div>
+          </div>
+        </div>
+        <div class="panel">
+          <h3>Accepted consultations</h3>
+          <div id="doctorAppointmentsAcceptedPage" class="appointment-list">
+            <div class="empty-appointments">Loading appointments...</div>
+          </div>
+        </div>
+      </section>
     </main>
   </div>
 
@@ -1638,14 +1880,13 @@
     </div>
   </div>
 
-  <div id="symptomModal" class="symptom-modal" onclick="closeSymptomCheckerOnBackdrop(event)">
-    <div class="symptom-box">
+  <div id="symptomModal" class="symptom-modal symptom-page-modal">
+    <div class="symptom-box symptom-page-box">
       <div class="symptom-header">
         <div>
           <h2>Symptom Checker</h2>
           <p>Select your symptoms. This is a screening tool, not a medical diagnosis.</p>
         </div>
-        <button class="close-symptom" type="button" onclick="closeSymptomChecker()">×</button>
       </div>
 
       <form id="symptomForm">
@@ -1796,8 +2037,218 @@
       </form>
     </div>
   </div>
+  <!-- Symptom Checker Disclaimer Modal (PRD 5.2 Mandatory Safety Disclaimer) -->
+  <div class="modal" id="symptomDisclaimerModal" onclick="closeSymptomDisclaimerOnBackdrop(event)">
+    <div class="modal-card" style="max-width:500px;text-align:center;">
+      <div style="font-size:40px;margin-bottom:10px;">⚠️</div>
+      <h2 style="margin:0 0 10px;color:var(--ink);">Important Medical Disclaimer</h2>
+      <p style="color:var(--muted);font-size:14px;line-height:1.6;margin-bottom:20px;">
+        The AI Symptom Checker is an informational &amp; preliminary guidance tool only.
+        <strong>It does not provide professional medical diagnosis or treatment.</strong>
+        If you are experiencing a medical emergency (e.g. chest pain, severe breathing difficulty), please seek immediate emergency care.
+      </p>
+      <div style="display:flex;gap:10px;justify-content:center;">
+        <button
+          type="button"
+          onclick="closeSymptomDisclaimer()"
+          style="padding:10px 20px;border:1px solid var(--line);background:white;border-radius:8px;cursor:pointer;font-weight:600;"
+        >
+          Cancel
+        </button>
+        <button
+          type="button"
+          onclick="acceptSymptomDisclaimer()"
+          style="padding:10px 20px;border:0;background:var(--green);color:white;border-radius:8px;cursor:pointer;font-weight:600;"
+        >
+          I Understand &amp; Agree
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Medicine Reminders Modal -->
+  <div class="modal medicine-page-modal" id="medicineReminderModal">
+    <div class="modal-card medicine-page-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;gap:12px;">
+        <h2 style="margin:0;font-family:Georgia,serif;">💊 Medicine Reminders</h2>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <button id="medicineNotificationButton" type="button" onclick="enableMedicineNotifications()" style="border:1px solid var(--green);background:white;color:var(--green);border-radius:8px;padding:9px 12px;font-size:12px;font-weight:800;cursor:pointer;">Enable phone notifications</button>
+          <button type="button" onclick="toggleMedicineReminderForm(true)" style="border:0;background:var(--green);color:white;border-radius:8px;padding:9px 12px;font-size:12px;font-weight:800;cursor:pointer;">+ Add reminder</button>
+          <button type="button" onclick="closeMedicineReminders()" aria-label="Close medicine reminders" style="border:0;background:var(--green-2);color:var(--green);width:32px;height:32px;border-radius:50%;font-size:18px;cursor:pointer;">✕</button>
+        </div>
+      </div>
+      <div id="medicineNotificationStatus" style="margin:-5px 0 18px;color:var(--muted);font-size:12px;line-height:1.4;">
+        Reminders will appear in this app while it is open. Enable phone notifications for browser alerts too.
+      </div>
+      <div id="medicineAlert" style="display:none;background:#fff1d9;color:#805500;border:1px solid #f0d28f;border-radius:10px;padding:11px 13px;margin-bottom:16px;font-size:13px;font-weight:700;"></div>
+
+      <form id="medicineForm" onsubmit="submitMedicineReminder(event)" style="display:none;background:#f9fafb;padding:16px;border-radius:12px;border:1px solid var(--line);margin-bottom:20px;">
+        <h4 id="medicineFormTitle" style="margin:0 0 12px;color:var(--ink);">Add New Medicine Reminder</h4>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
+          <div>
+            <label style="display:block;font-size:11px;font-weight:700;margin-bottom:4px;">Medicine Name</label>
+            <input type="text" id="medName" placeholder="e.g. Paracetamol" required style="width:100%;padding:9px;border:1px solid var(--line);border-radius:8px;box-sizing:border-radius;" />
+          </div>
+          <div>
+            <label style="display:block;font-size:11px;font-weight:700;margin-bottom:4px;">Dosage</label>
+            <input type="text" id="medDosage" placeholder="e.g. 1 Tablet" required style="width:100%;padding:9px;border:1px solid var(--line);border-radius:8px;box-sizing:border-radius;" />
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
+          <div>
+            <label style="display:block;font-size:11px;font-weight:700;margin-bottom:4px;">Frequency</label>
+            <select id="medFrequency" required style="width:100%;padding:9px;border:1px solid var(--line);border-radius:8px;">
+              <option value="Once a day">Once a day</option>
+              <option value="Twice a day">Twice a day</option>
+              <option value="Three times a day">Three times a day</option>
+              <option value="As needed">As needed</option>
+            </select>
+          </div>
+          <div>
+            <label style="display:block;font-size:11px;font-weight:700;margin-bottom:4px;">Time</label>
+            <input type="time" id="medTime" required style="width:100%;padding:9px;border:1px solid var(--line);border-radius:8px;" />
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;">
+          <div>
+            <label style="display:block;font-size:11px;font-weight:700;margin-bottom:4px;">Start Date</label>
+            <input type="date" id="medStartDate" required style="width:100%;padding:9px;border:1px solid var(--line);border-radius:8px;" />
+          </div>
+          <div>
+            <label style="display:block;font-size:11px;font-weight:700;margin-bottom:4px;">End Date</label>
+            <input type="date" id="medEndDate" required style="width:100%;padding:9px;border:1px solid var(--line);border-radius:8px;" />
+          </div>
+        </div>
+
+        <div style="display:flex;gap:8px;">
+          <button type="button" onclick="toggleMedicineReminderForm(false)" style="flex:1;padding:10px;background:white;color:var(--green);border:1px solid var(--line);border-radius:8px;font-weight:700;cursor:pointer;">Cancel</button>
+          <button id="medicineSubmitButton" type="submit" style="flex:1;padding:10px;background:var(--green);color:white;border:0;border-radius:8px;font-weight:700;cursor:pointer;">Save reminder</button>
+        </div>
+      </form>
+
+      <h4 style="margin:0 0 10px;color:var(--ink);">All Medication Reminders</h4>
+      <div id="medicineListContainer">
+        <p style="color:var(--muted);font-size:13px;">Loading reminders...</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Health Records Modal -->
+  <div class="modal health-records-page-modal" id="healthRecordsModal">
+    <div class="modal-card health-records-page-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+        <h2 style="margin:0;font-family:Georgia,serif;">📁 Digital Health Records</h2>
+        <button type="button" onclick="closeHealthRecords()" aria-label="Back to dashboard" style="border:0;background:var(--green-2);color:var(--green);border-radius:8px;padding:9px 12px;font-size:12px;font-weight:800;cursor:pointer;">← Dashboard</button>
+      </div>
+
+      <!-- Patient Profile Info -->
+      <div id="healthRecordPatientInfo" style="background:var(--green-2);padding:14px;border-radius:12px;margin-bottom:18px;">
+        <h4 style="margin:0 0 6px;color:var(--green);">Patient Summary</h4>
+        <div id="healthRecordPatientDetails" style="font-size:13px;color:var(--ink);display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+          <span>Loading patient details...</span>
+        </div>
+      </div>
+
+      <!-- Consultation / Appointment History -->
+      <h4 style="margin:16px 0 8px;color:var(--ink);">Past Consultations &amp; Appointments</h4>
+      <div id="healthRecordAppointmentsContainer">
+        <p style="color:var(--muted);font-size:13px;">Loading consultations...</p>
+      </div>
+
+      <!-- Symptom Check History -->
+      <h4 style="margin:20px 0 8px;color:var(--ink);">Symptom Check History</h4>
+      <div id="healthRecordSymptomsContainer">
+        <p style="color:var(--muted);font-size:13px;">Loading symptom history...</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Payment Method Selection Modal -->
+  <div class="booking-modal" id="paymentModal" style="display:none;position:fixed;inset:0;background:rgba(22,48,43,.52);z-index:99999;padding:20px;align-items:center;justify-content:center;">
+    <div class="booking-box" style="max-width:480px;position:relative;z-index:100000;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+        <h3 style="margin:0;font-family:Georgia,serif;color:var(--ink);">💳 Select Payment Method</h3>
+        <button type="button" onclick="closePaymentModal()" style="border:0;background:none;font-size:20px;cursor:pointer;color:var(--muted);">&times;</button>
+      </div>
+
+      <div id="paymentModalDoctorDetails" style="background:var(--green-2);padding:14px;border-radius:12px;margin-bottom:16px;">
+        <!-- Dynamic doctor info -->
+      </div>
+
+      <div style="display:flex;gap:8px;margin-bottom:16px;">
+        <button type="button" id="tabGpayBtn" onclick="switchPaymentTab('gpay')" style="flex:1;padding:10px;border:1px solid var(--green);background:var(--green);color:white;border-radius:8px;font-weight:700;cursor:pointer;font-size:13px;">📲 GPay</button>
+        <button type="button" id="tabUpiBtn" onclick="switchPaymentTab('upi')" style="flex:1;padding:10px;border:1px solid var(--line);background:white;color:var(--ink);border-radius:8px;font-weight:700;cursor:pointer;font-size:13px;">💸 UPI Pay</button>
+        <button type="button" id="tabRazorpayBtn" onclick="switchPaymentTab('razorpay')" style="flex:1;padding:10px;border:1px solid var(--line);background:white;color:var(--ink);border-radius:8px;font-weight:700;cursor:pointer;font-size:13px;">💳 Card/Gateway</button>
+      </div>
+
+      <!-- Tab 1: GPay -->
+      <div id="paymentTabGpay" style="display:block;">
+        <p style="font-size:13px;color:var(--muted);margin-bottom:12px;">
+          Pay consultation fee directly to the doctor's Google Pay number:
+        </p>
+        <div style="background:#f4f7f6;padding:12px;border-radius:10px;display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+          <div>
+            <div style="font-size:11px;color:var(--muted);font-weight:700;">Doctor GPay Number:</div>
+            <span style="font-weight:700;font-size:16px;color:var(--ink);" id="gpayPhoneNumber">+91 --</span>
+          </div>
+          <button type="button" onclick="copyPaymentDetail('gpayPhoneNumber')" style="background:var(--green-2);color:var(--green);border:0;padding:6px 12px;border-radius:6px;font-weight:700;cursor:pointer;font-size:12px;">Copy Number</button>
+        </div>
+        <div style="margin-bottom:14px;">
+          <a id="gpayDeepLink" href="#" target="_blank" style="display:block;text-align:center;background:#4285F4;color:white;padding:11px;border-radius:8px;text-decoration:none;font-weight:700;font-size:14px;margin-bottom:10px;">
+            🚀 Open Google Pay App
+          </a>
+        </div>
+        <div style="margin-bottom:14px;">
+          <label style="display:block;font-size:11px;font-weight:700;margin-bottom:4px;">Transaction Ref / UTR Number (Optional)</label>
+          <input type="text" id="gpayTxnId" placeholder="e.g. 324156789012" style="width:100%;padding:9px;border:1px solid var(--line);border-radius:8px;box-sizing:border-box;" />
+        </div>
+        <button type="button" onclick="confirmDirectPaymentSubmit('gpay')" style="width:100%;padding:12px;background:var(--green);color:white;border:0;border-radius:8px;font-weight:700;cursor:pointer;font-size:14px;">
+          ✅ Confirm GPay Payment
+        </button>
+      </div>
+
+      <!-- Tab 2: UPI Pay -->
+      <div id="paymentTabUpi" style="display:none;">
+        <p style="font-size:13px;color:var(--muted);margin-bottom:12px;">
+          Send UPI payment to doctor's Phone Number / UPI ID:
+        </p>
+        <div style="background:#f4f7f6;padding:12px;border-radius:10px;display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+          <div>
+            <div style="font-size:11px;color:var(--muted);font-weight:700;">Doctor UPI ID:</div>
+            <span style="font-weight:700;font-size:15px;color:var(--ink);" id="upiIdString">doctor@upi</span>
+          </div>
+          <button type="button" onclick="copyPaymentDetail('upiIdString')" style="background:var(--green-2);color:var(--green);border:0;padding:6px 12px;border-radius:6px;font-weight:700;cursor:pointer;font-size:12px;">Copy UPI ID</button>
+        </div>
+        <div style="margin-bottom:14px;">
+          <a id="upiDeepLink" href="#" target="_blank" style="display:block;text-align:center;background:#0f7668;color:white;padding:11px;border-radius:8px;text-decoration:none;font-weight:700;font-size:14px;margin-bottom:10px;">
+            📱 Pay via Any UPI App (PhonePe / Paytm / BHIM)
+          </a>
+        </div>
+        <div style="margin-bottom:14px;">
+          <label style="display:block;font-size:11px;font-weight:700;margin-bottom:4px;">UPI Transaction Ref / UTR (Optional)</label>
+          <input type="text" id="upiTxnId" placeholder="e.g. UPI324156789012" style="width:100%;padding:9px;border:1px solid var(--line);border-radius:8px;box-sizing:border-box;" />
+        </div>
+        <button type="button" onclick="confirmDirectPaymentSubmit('upi')" style="width:100%;padding:12px;background:var(--green);color:white;border:0;border-radius:8px;font-weight:700;cursor:pointer;font-size:14px;">
+          ✅ Confirm UPI Payment
+        </button>
+      </div>
+
+      <!-- Tab 3: Razorpay -->
+      <div id="paymentTabRazorpay" style="display:none;text-align:center;">
+        <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">
+          Pay online securely using Credit/Debit Card, NetBanking or Razorpay Gateway.
+        </p>
+        <button type="button" onclick="payViaRazorpayCheckout()" style="width:100%;padding:12px;background:var(--green);color:white;border:0;border-radius:8px;font-weight:700;cursor:pointer;font-size:14px;">
+          💳 Pay via Razorpay Checkout
+        </button>
+      </div>
+    </div>
+  </div>
 
   <div class="toast" id="toast"></div>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   <script>
     const API_URL = "http://localhost:5000/api";
 
@@ -2528,7 +2979,9 @@
       const reason = item.reason
         ? `Reason: ${escapeHtml(item.reason)}`
         : "No reason provided";
-
+      const consultationMode = item.mode === "telemedicine"
+        ? "🎥 Jitsi Meet consultation"
+        : "📍 In-person consultation";
       let actions = "";
 
       if (role === "doctor" && status === "requested") {
@@ -2564,6 +3017,7 @@
                   </span>
                 `
             }
+              <button class="appointment-action" onclick="updateAppointmentStatus('${item._id}', 'completed')">Mark completed</button>
           </div>`;
       }
 
@@ -2589,12 +3043,19 @@
           </div>`;
       }
 
+      if (role === "patient" && status === "completed") {
+        actions = item.payment?.status === "paid"
+          ? `<div class="appointment-actions"><span class="appointment-status status-completed">Paid</span></div>`
+          : `<div class="appointment-actions"><button class="appointment-action accept" onclick="payForAppointment('${item._id}')">Pay ₹${escapeHtml(String(item.doctor?.consultationFee ?? 0))} via UPI / GPay</button></div>`;
+      }
+
       return `
         <div class="appointment-card">
           <div class="appointment-card-main">
             <strong>${escapeHtml(otherName)}</strong>
             ${specialization ? `<span>${specialization}</span>` : ""}
             <span>📅 ${escapeHtml(date)}</span>
+            <span>${consultationMode}</span>
             <span>💬 ${reason}</span>
             ${appointmentStatusHtml(status)}
           </div>
@@ -2662,11 +3123,23 @@
       }
     }
 
+    let navigationRequestId = 0;
+
     function showPatientDashboard() {
+      navigationRequestId += 1;
       const dashboard = document.getElementById("patientDashboard");
       const appointmentsView = document.getElementById("patientAppointmentsView");
+      const telemedicineView = document.getElementById("patientTelemedicineView");
+      const profilePage = document.getElementById("userProfilePage");
+
+      closeSymptomDisclaimer();
+      closeSymptomChecker();
+      closeMedicineReminders();
+      closeHealthRecords();
+      closeBookingModal();
 
       if (dashboard) {
+        dashboard.style.display = "block";
         // Keep the dashboard visible; hide only the dedicated appointment view.
         dashboard.querySelector(".welcome").style.display = "flex";
         dashboard.querySelector(".hero").style.display = "block";
@@ -2681,6 +3154,8 @@
       }
 
       if (appointmentsView) appointmentsView.style.display = "none";
+      if (telemedicineView) telemedicineView.style.display = "none";
+      if (profilePage) profilePage.style.display = "none";
 
       document.querySelectorAll("#patientNav .nav-item").forEach(item => {
         item.classList.remove("active");
@@ -2690,7 +3165,181 @@
       if (dashboardNav) dashboardNav.classList.add("active");
     }
 
+    function renderUserProfile(user, appointments) {
+      const profileTitle = document.getElementById("profilePageTitle");
+      const details = document.getElementById("profileDetailsGrid");
+      const count = document.querySelector("#profileTelemedicineCount strong");
+      const completedTelemedicine = appointments.filter(
+        item => item.mode === "telemedicine" && item.status === "completed"
+      ).length;
+
+      if (profileTitle) profileTitle.textContent = user.role === "doctor" ? `Dr. ${user.name || "Doctor"}` : (user.name || "My Profile");
+      if (count) count.textContent = completedTelemedicine;
+      if (!details) return;
+
+      const fields = [
+        ["Full name", user.name],
+        ["Email", user.email],
+        ["Phone", user.phone],
+        ["Role", user.role],
+        ["Location", user.location],
+        ["Preferred language", user.preferredLanguage]
+      ];
+
+      if (user.role === "patient") {
+        fields.push(["Age", user.age], ["Gender", user.gender]);
+      } else {
+        fields.push(
+          ["Specialization", user.specialization],
+          ["Qualification", user.qualification],
+          ["Experience", `${user.yearsOfExperience ?? 0} years`],
+          ["Hospital / clinic", user.hospitalClinicName],
+          ["Consultation fee", `₹${user.consultationFee ?? 0}`]
+        );
+      }
+
+      details.innerHTML = fields.map(([label, value]) => `
+        <div class="profile-detail">
+          <span>${escapeHtml(label)}</span>
+          <strong>${escapeHtml(value || "Not provided")}</strong>
+        </div>
+      `).join("");
+    }
+
+    function startEditProfile() {
+      const user = currentUser;
+      if (!user) return;
+
+      document.getElementById("profileEditName").value = user.name || "";
+      document.getElementById("profileEditPhone").value = user.phone || "";
+      document.getElementById("profileEditLocation").value = user.location || "";
+      document.getElementById("profileEditLanguage").value = user.preferredLanguage || "";
+      document.getElementById("profileEditAge").value = user.age ?? "";
+      document.getElementById("profileEditGender").value = user.gender || "";
+      document.getElementById("profileEditSpecialization").value = user.specialization || "";
+      document.getElementById("profileEditQualification").value = user.qualification || "";
+      document.getElementById("profileEditExperience").value = user.yearsOfExperience ?? "";
+      document.getElementById("profileEditClinic").value = user.hospitalClinicName || "";
+      document.getElementById("profileEditFee").value = user.consultationFee ?? "";
+
+      document.querySelectorAll(".patient-profile-field").forEach(field => {
+        field.style.display = user.role === "patient" ? "block" : "none";
+      });
+      document.querySelectorAll(".doctor-profile-field").forEach(field => {
+        field.style.display = user.role === "doctor" ? "block" : "none";
+      });
+      document.getElementById("profileDetailsGrid").style.display = "none";
+      document.getElementById("profileEditForm").style.display = "block";
+      document.getElementById("editProfileButton").style.display = "none";
+    }
+
+    function cancelEditProfile() {
+      document.getElementById("profileDetailsGrid").style.display = "grid";
+      document.getElementById("profileEditForm").style.display = "none";
+      document.getElementById("editProfileButton").style.display = "block";
+      document.getElementById("profileEditMessage").textContent = "";
+    }
+
+    async function saveUserProfile(event) {
+      event.preventDefault();
+      const message = document.getElementById("profileEditMessage");
+      const user = currentUser;
+      const updates = {
+        name: document.getElementById("profileEditName").value.trim(),
+        phone: document.getElementById("profileEditPhone").value.trim(),
+        location: document.getElementById("profileEditLocation").value.trim(),
+        preferredLanguage: document.getElementById("profileEditLanguage").value.trim()
+      };
+
+      if (user.role === "patient") {
+        updates.age = Number(document.getElementById("profileEditAge").value);
+        updates.gender = document.getElementById("profileEditGender").value;
+      } else {
+        updates.specialization = document.getElementById("profileEditSpecialization").value.trim();
+        updates.qualification = document.getElementById("profileEditQualification").value.trim();
+        updates.yearsOfExperience = Number(document.getElementById("profileEditExperience").value);
+        updates.hospitalClinicName = document.getElementById("profileEditClinic").value.trim();
+        updates.consultationFee = Number(document.getElementById("profileEditFee").value);
+      }
+
+      message.textContent = "Saving...";
+      message.style.color = "var(--muted)";
+
+      try {
+        const response = await fetch(`${API_URL}/auth/profile`, {
+          method: "PUT",
+          headers: getAuthHeaders(),
+          body: JSON.stringify(updates)
+        });
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.message || "Unable to update profile");
+
+        currentUser = result.data;
+        currentUserName = currentUser.name || "";
+        updateDateAndGreeting();
+        renderUserProfile(currentUser, []);
+        cancelEditProfile();
+        notify("Profile updated successfully");
+      } catch (error) {
+        message.textContent = error.message;
+        message.style.color = "var(--danger)";
+      }
+    }
+
+    async function openUserProfile() {
+      const token = localStorage.getItem("token");
+      if (!token || !currentUser) {
+        notify("Please login first");
+        showLoginScreen();
+        return;
+      }
+
+      navigationRequestId += 1;
+      closeSymptomDisclaimer();
+      closeSymptomChecker();
+      closeMedicineReminders();
+      closeHealthRecords();
+      closeBookingModal();
+
+      document.getElementById("patientDashboard").style.display = "none";
+      document.getElementById("doctorDashboard").style.display = "none";
+      document.getElementById("doctorPatientsView").style.display = "none";
+      document.getElementById("doctorAppointmentsView").style.display = "none";
+      document.getElementById("userProfilePage").style.display = "block";
+      document.getElementById("profileDetailsGrid").innerHTML = '<div class="empty-appointments">Loading profile details...</div>';
+
+      document.querySelectorAll("#patientNav .nav-item, #doctorNav .nav-item").forEach(item => {
+        item.classList.remove("active");
+      });
+      const profileNav = currentUser.role === "doctor"
+        ? document.getElementById("doctorProfileNav")
+        : null;
+      if (profileNav) profileNav.classList.add("active");
+
+      try {
+        const endpoint = currentUser.role === "doctor"
+          ? `${API_URL}/appointments/doctor`
+          : `${API_URL}/appointments/patient`;
+        const response = await fetch(endpoint, { headers: getAuthHeaders() });
+        const result = await response.json();
+
+        if (!response.ok) throw new Error(result.message || "Unable to load consultation details");
+        renderUserProfile(currentUser, result.data || []);
+      } catch (error) {
+        console.error("Profile page error:", error);
+        renderUserProfile(currentUser, []);
+        notify(error.message);
+      }
+    }
+
+    function closeUserProfile() {
+      document.getElementById("userProfilePage").style.display = "none";
+      if (currentUser?.role === "doctor") showDoctorDashboard();
+      else showPatientDashboard();
+    }
+
     async function openPatientAppointments() {
+      const requestId = ++navigationRequestId;
       const token = localStorage.getItem("token");
 
       if (!token) {
@@ -2699,8 +3348,15 @@
         return;
       }
 
+      closeSymptomDisclaimer();
+      closeSymptomChecker();
+      closeMedicineReminders();
+      closeHealthRecords();
+      closeBookingModal();
+
       const dashboard = document.getElementById("patientDashboard");
       const appointmentsView = document.getElementById("patientAppointmentsView");
+      const telemedicineView = document.getElementById("patientTelemedicineView");
 
       if (!appointmentsView) {
         notify("Appointments page is unavailable");
@@ -2729,6 +3385,9 @@
       }
 
       appointmentsView.style.display = "block";
+      if (telemedicineView) telemedicineView.style.display = "none";
+      const appointmentsHeading = appointmentsView.querySelector(".doctor-section-title h3");
+      if (appointmentsHeading) appointmentsHeading.textContent = "Appointments";
 
       // Show all registered doctors in the Patient Appointments section.
       loadRegisteredDoctors();
@@ -2740,7 +3399,224 @@
       const nav = document.getElementById("patientAppointmentsNav");
       if (nav) nav.classList.add("active");
 
-      await loadPatientAppointments();
+      if (requestId === navigationRequestId) {
+        await loadPatientAppointments();
+      }
+    }
+
+    async function openTelemedicine() {
+      const requestId = ++navigationRequestId;
+      if (!localStorage.getItem("token")) {
+        notify("Please login first");
+        showLoginScreen();
+        return;
+      }
+
+      closeSymptomDisclaimer();
+      closeSymptomChecker();
+      closeMedicineReminders();
+      closeHealthRecords();
+      closeBookingModal();
+
+      const dashboard = document.getElementById("patientDashboard");
+      const appointmentsView = document.getElementById("patientAppointmentsView");
+      const telemedicineView = document.getElementById("patientTelemedicineView");
+
+      if (dashboard) {
+        dashboard.querySelector(".welcome").style.display = "none";
+        dashboard.querySelector(".hero").style.display = "none";
+        dashboard.querySelector(".section-title").style.display = "none";
+        dashboard.querySelector(".quick-grid").style.display = "none";
+        dashboard.querySelector(".lower").style.display = "none";
+        dashboard.querySelector(".doctor-section-title").style.display = "none";
+        document.getElementById("patientAppointmentList").style.display = "none";
+      }
+      if (appointmentsView) appointmentsView.style.display = "none";
+      if (telemedicineView) telemedicineView.style.display = "block";
+
+      const list = document.getElementById("patientTelemedicineList");
+      if (list) list.innerHTML = '<div class="empty-appointments">Loading consultations...</div>';
+
+      document.querySelectorAll("#patientNav .nav-item").forEach(item => {
+        item.classList.remove("active");
+      });
+      document.getElementById("patientTelemedicineNav")?.classList.add("active");
+
+      const response = await fetch(`${API_URL}/appointments/patient`, {
+        headers: getAuthHeaders()
+      });
+      const result = await response.json();
+
+      if (requestId !== navigationRequestId) return;
+
+      if (!response.ok) {
+        notify(result.message || "Unable to load telemedicine consultations");
+        return;
+      }
+
+      const consultations = (result.data || []).filter(
+        item => item.status === "accepted" && item.mode === "telemedicine"
+      );
+      if (list) {
+        list.innerHTML = consultations.length
+          ? consultations.map(item => renderAppointmentCard(item, "patient")).join("")
+          : '<div class="empty-appointments">No accepted telemedicine consultations yet.</div>';
+      }
+
+    }
+
+    async function openDoctorTelemedicine() {
+      await loadDoctorAppointments();
+      const pendingList = document.getElementById("doctorPendingList");
+      const pendingHeading = document.querySelector("#doctorDashboard .doctor-section-title");
+      const acceptedHeading = document.querySelectorAll("#doctorDashboard .doctor-section-title")[1];
+
+      if (pendingList) pendingList.style.display = "none";
+      if (pendingHeading) pendingHeading.style.display = "none";
+      if (acceptedHeading) {
+        acceptedHeading.style.display = "flex";
+        const heading = acceptedHeading.querySelector("h3");
+        if (heading) heading.textContent = "Accepted Telemedicine Consultations";
+      }
+
+      document.querySelectorAll("#doctorNav .nav-item").forEach(item => {
+        item.classList.remove("active");
+      });
+      document.querySelector("#doctorNav .nav-item:nth-child(3)")?.classList.add("active");
+    }
+
+    function showDoctorDashboard() {
+      document.getElementById("userProfilePage").style.display = "none";
+      document.getElementById("patientDashboard").style.display = "none";
+      document.getElementById("doctorAppointmentsView").style.display = "none";
+      document.getElementById("doctorDashboard").style.display = "block";
+      const pendingList = document.getElementById("doctorPendingList");
+      const pendingHeading = document.querySelector("#doctorDashboard .doctor-section-title");
+      const acceptedHeading = document.querySelectorAll("#doctorDashboard .doctor-section-title")[1];
+
+      if (pendingList) pendingList.style.display = "grid";
+      if (pendingHeading) pendingHeading.style.display = "flex";
+      if (acceptedHeading) {
+        const heading = acceptedHeading.querySelector("h3");
+        if (heading) heading.textContent = "Accepted / Upcoming Consultations";
+      }
+
+      document.querySelectorAll("#doctorNav .nav-item").forEach(item => {
+        item.classList.remove("active");
+      });
+      document.querySelector("#doctorNav .nav-item")?.classList.add("active");
+    }
+
+    async function openDoctorAppointments() {
+      document.getElementById("userProfilePage").style.display = "none";
+      document.getElementById("doctorPatientsView").style.display = "none";
+      document.getElementById("doctorAppointmentsView").style.display = "block";
+      document.getElementById("patientDashboard").style.display = "none";
+      document.getElementById("doctorDashboard").style.display = "none";
+
+      document.querySelectorAll("#doctorNav .nav-item").forEach(item => {
+        item.classList.remove("active");
+      });
+      document.getElementById("doctorAppointmentsNav")?.classList.add("active");
+      await loadDoctorAppointmentPage();
+    }
+
+    async function loadDoctorAppointmentPage() {
+      const pendingList = document.getElementById("doctorAppointmentsPendingPage");
+      const acceptedList = document.getElementById("doctorAppointmentsAcceptedPage");
+      if (!pendingList || !acceptedList) return;
+
+      pendingList.innerHTML = '<div class="empty-appointments">Loading appointments...</div>';
+      acceptedList.innerHTML = '<div class="empty-appointments">Loading appointments...</div>';
+
+      try {
+        const response = await fetch(`${API_URL}/appointments/doctor`, {
+          headers: getAuthHeaders()
+        });
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.message || "Unable to load appointments");
+
+        const appointments = result.data || [];
+        const pending = appointments.filter(item => item.status === "requested");
+        const accepted = appointments.filter(item => item.status === "accepted");
+
+        pendingList.innerHTML = pending.length
+          ? pending.map(item => renderAppointmentCard(item, "doctor")).join("")
+          : '<div class="empty-appointments">No pending consultation requests.</div>';
+        acceptedList.innerHTML = accepted.length
+          ? accepted.map(item => renderAppointmentCard(item, "doctor")).join("")
+          : '<div class="empty-appointments">No accepted consultations yet.</div>';
+      } catch (error) {
+        pendingList.innerHTML = `<div class="empty-appointments">${escapeHtml(error.message)}</div>`;
+        acceptedList.innerHTML = `<div class="empty-appointments">${escapeHtml(error.message)}</div>`;
+      }
+    }
+
+    async function openDoctorPatients() {
+      const token = localStorage.getItem("token");
+      if (!token || currentUser?.role !== "doctor") {
+        notify("Please login as a doctor first");
+        return;
+      }
+
+      document.getElementById("doctorDashboard").style.display = "none";
+      document.getElementById("userProfilePage").style.display = "none";
+      document.getElementById("doctorAppointmentsView").style.display = "none";
+      document.getElementById("doctorPatientsView").style.display = "block";
+      document.querySelectorAll("#doctorNav .nav-item").forEach(item => {
+        item.classList.remove("active");
+      });
+      document.getElementById("doctorPatientsNav")?.classList.add("active");
+      await loadDoctorPatients();
+    }
+
+    async function loadDoctorPatients() {
+      const list = document.getElementById("doctorPatientsList");
+      if (!list) return;
+
+      list.innerHTML = '<div class="doctor-directory-message">Loading patients...</div>';
+
+      try {
+        const response = await fetch(`${API_URL}/appointments/doctor`, {
+          headers: getAuthHeaders()
+        });
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.message || "Unable to load patients");
+
+        const patients = new Map();
+        (result.data || []).forEach(appointment => {
+          const patient = appointment.patient;
+          if (!patient?._id) return;
+
+          const entry = patients.get(String(patient._id)) || { patient, count: 0 };
+          entry.count += 1;
+          patients.set(String(patient._id), entry);
+        });
+
+        const entries = [...patients.values()];
+        if (!entries.length) {
+          list.innerHTML = '<div class="doctor-directory-message">No patients have booked a consultation yet.</div>';
+          return;
+        }
+
+        list.innerHTML = entries.map(({ patient, count }) => `
+          <div class="doctor-directory-card">
+            <div class="doctor-directory-avatar">👤</div>
+            <div class="doctor-directory-info">
+              <h4>${escapeHtml(patient.name || "Patient")}</h4>
+              <div class="doctor-detail"><strong>Email:</strong> ${escapeHtml(patient.email || "Not provided")}</div>
+              <div class="doctor-detail"><strong>Phone:</strong> ${escapeHtml(patient.phone || "Not provided")}</div>
+              <div class="doctor-detail"><strong>Age:</strong> ${escapeHtml(String(patient.age ?? "Not provided"))} · <strong>Gender:</strong> ${escapeHtml(patient.gender || "Not provided")}</div>
+              <div class="doctor-detail"><strong>Location:</strong> ${escapeHtml(patient.location || "Not provided")}</div>
+              <div class="doctor-detail"><strong>Preferred language:</strong> ${escapeHtml(patient.preferredLanguage || "Not provided")}</div>
+              <div class="doctor-fee">${count} booked consultation${count === 1 ? "" : "s"}</div>
+            </div>
+          </div>
+        `).join("");
+      } catch (error) {
+        console.error("Doctor patients error:", error);
+        list.innerHTML = `<div class="doctor-directory-message">${escapeHtml(error.message)}</div>`;
+      }
     }
 
     async function loadPatientAppointments() {
@@ -2766,6 +3642,7 @@
         }
 
         const appointments = result.data || [];
+        window._cachedPatientAppointments = appointments;
 
         const renderedAppointments = appointments.length
           ? appointments.map(item => renderAppointmentCard(item, "patient")).join("")
@@ -2876,6 +3753,186 @@
       openJitsiConsultation(meetLink, "Join Consultation");
     }
 
+    let activePaymentAppointmentId = null;
+
+    async function payForAppointment(appointmentId) {
+      activePaymentAppointmentId = appointmentId;
+      
+      let item = (window._cachedPatientAppointments || []).find(a => a._id === appointmentId);
+
+      if (!item) {
+        try {
+          const res = await fetch(`${API_URL}/appointments/patient`, { headers: getAuthHeaders() });
+          const result = await res.json();
+          if (res.ok && result.data) {
+            window._cachedPatientAppointments = result.data;
+            item = result.data.find(a => a._id === appointmentId);
+          }
+        } catch (err) {
+          console.error("Fetch appointment for payment error:", err);
+        }
+      }
+
+      const doctor = item?.doctor || {};
+
+      const fee = doctor.consultationFee ?? 0;
+      const phone = doctor.phone || "Not provided";
+      const cleanPhone = phone !== "Not provided" ? phone.replace(/\D/g, "") : "";
+      const upiId = cleanPhone ? `${cleanPhone}@upi` : "doctor@upi";
+      const doctorName = doctor.name || "Doctor";
+      const specialization = doctor.specialization || "Medical Professional";
+
+      const detailsEl = document.getElementById("paymentModalDoctorDetails");
+      if (detailsEl) {
+        detailsEl.innerHTML = `
+          <h4 style="margin:0 0 6px;color:var(--green);font-size:16px;">Dr. ${escapeHtml(doctorName)}</h4>
+          <div style="font-size:13px;color:var(--ink);line-height:1.5;">
+            <div><strong>Specialization:</strong> ${escapeHtml(specialization)}</div>
+            <div><strong>Consultation Fee:</strong> <span style="color:var(--green);font-weight:800;font-size:15px;">₹${fee}</span></div>
+            <div><strong>Doctor's Phone (GPay / UPI):</strong> <span style="font-weight:700;">📞 ${escapeHtml(phone)}</span></div>
+          </div>
+        `;
+      }
+
+      const gpayPhoneEl = document.getElementById("gpayPhoneNumber");
+      if (gpayPhoneEl) gpayPhoneEl.innerText = phone;
+
+      const upiIdEl = document.getElementById("upiIdString");
+      if (upiIdEl) upiIdEl.innerText = upiId;
+
+      const upiUrl = cleanPhone
+        ? `upi://pay?pa=${encodeURIComponent(upiId)}&pn=${encodeURIComponent("Dr " + doctorName)}&am=${fee}&cu=INR`
+        : "#";
+
+      const gpayLinkEl = document.getElementById("gpayDeepLink");
+      if (gpayLinkEl) gpayLinkEl.href = upiUrl;
+
+      const upiLinkEl = document.getElementById("upiDeepLink");
+      if (upiLinkEl) upiLinkEl.href = upiUrl;
+
+      switchPaymentTab("gpay");
+      const modal = document.getElementById("paymentModal");
+      if (modal) {
+        modal.style.display = "flex";
+        modal.classList.add("show");
+      }
+    }
+
+    function closePaymentModal() {
+      const modal = document.getElementById("paymentModal");
+      if (modal) {
+        modal.style.display = "none";
+        modal.classList.remove("show");
+      }
+      activePaymentAppointmentId = null;
+    }
+
+    function switchPaymentTab(tabName) {
+      const tabs = ["gpay", "upi", "razorpay"];
+      tabs.forEach(t => {
+        const tabEl = document.getElementById(`paymentTab${t.charAt(0).toUpperCase() + t.slice(1)}`);
+        const btnEl = document.getElementById(`tab${t.charAt(0).toUpperCase() + t.slice(1)}Btn`);
+        if (tabEl) tabEl.style.display = (t === tabName) ? "block" : "none";
+        if (btnEl) {
+          if (t === tabName) {
+            btnEl.style.background = "var(--green)";
+            btnEl.style.color = "white";
+            btnEl.style.borderColor = "var(--green)";
+          } else {
+            btnEl.style.background = "white";
+            btnEl.style.color = "var(--ink)";
+            btnEl.style.borderColor = "var(--line)";
+          }
+        }
+      });
+    }
+
+    function copyPaymentDetail(elementId) {
+      const el = document.getElementById(elementId);
+      if (!el) return;
+      const text = el.innerText || el.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        notify("Copied: " + text);
+      }).catch(() => {
+        notify("Copied: " + text);
+      });
+    }
+
+    async function confirmDirectPaymentSubmit(method) {
+      if (!activePaymentAppointmentId) return;
+      const txnInputId = method === "gpay" ? "gpayTxnId" : "upiTxnId";
+      const txnId = (document.getElementById(txnInputId)?.value || "").trim();
+
+      try {
+        const response = await fetch(`${API_URL}/payments/appointments/${activePaymentAppointmentId}/direct-pay`, {
+          method: "POST",
+          headers: getAuthHeaders(),
+          body: JSON.stringify({ paymentMethod: method, transactionId: txnId })
+        });
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.message || "Payment confirmation failed");
+        
+        notify(result.message || "Payment recorded successfully!");
+        closePaymentModal();
+        await loadPatientAppointments();
+      } catch (err) {
+        console.error("Direct payment error:", err);
+        notify(err.message);
+      }
+    }
+
+    async function payViaRazorpayCheckout() {
+      if (!activePaymentAppointmentId) return;
+      const appointmentId = activePaymentAppointmentId;
+      closePaymentModal();
+
+      if (!window.Razorpay) {
+        notify("Payment checkout is still loading. Please try again.");
+        return;
+      }
+
+      try {
+        const orderResponse = await fetch(`${API_URL}/payments/appointments/${appointmentId}/order`, {
+          method: "POST",
+          headers: getAuthHeaders()
+        });
+        const orderResult = await orderResponse.json();
+        if (!orderResponse.ok) throw new Error(orderResult.message || "Unable to start payment");
+
+        const checkout = new Razorpay({
+          key: orderResult.data.keyId,
+          amount: orderResult.data.amount,
+          currency: orderResult.data.currency,
+          name: "Swasthya Saathi",
+          description: "Completed consultation fee",
+          order_id: orderResult.data.orderId,
+          prefill: {
+            name: currentUser?.name || "",
+            email: currentUser?.email || "",
+            contact: currentUser?.phone || ""
+          },
+          theme: { color: "#0f7668" },
+          handler: async function (paymentResponse) {
+            const verifyResponse = await fetch(`${API_URL}/payments/appointments/${appointmentId}/verify`, {
+              method: "POST",
+              headers: getAuthHeaders(),
+              body: JSON.stringify(paymentResponse)
+            });
+            const verifyResult = await verifyResponse.json();
+            if (!verifyResponse.ok) throw new Error(verifyResult.message || "Payment verification failed");
+            notify("Payment successful and verified");
+            await loadPatientAppointments();
+          }
+        });
+
+        checkout.on("payment.failed", () => notify("Payment failed. Please try again."));
+        checkout.open();
+      } catch (error) {
+        console.error("Payment error:", error);
+        notify(error.message);
+      }
+    }
+
     function applyRoleBasedDashboard(user) {
       currentUser = user;
 
@@ -2976,11 +4033,39 @@
         return;
       }
 
+      navigationRequestId += 1;
+      closeMedicineReminders();
+      closeHealthRecords();
+      closeBookingModal();
+      document.getElementById("patientAppointmentsView").style.display = "none";
+      document.getElementById("patientTelemedicineView").style.display = "none";
+      document.querySelectorAll("#patientNav .nav-item").forEach(item => {
+        item.classList.remove("active");
+      });
+      document.querySelector("#patientNav .nav-item:nth-child(2)")?.classList.add("active");
+
+      // Show mandatory safety disclaimer modal first (PRD 5.2)
+      document.getElementById("symptomDisclaimerModal").classList.add("show");
+    }
+
+    function acceptSymptomDisclaimer() {
+      document.getElementById("symptomDisclaimerModal").classList.remove("show");
+
       // Always start with a fresh symptom form.
       resetSymptomCheckerForm();
 
       document.getElementById("symptomModal").classList.add("show");
       loadSymptomHistory();
+    }
+
+    function closeSymptomDisclaimer() {
+      document.getElementById("symptomDisclaimerModal").classList.remove("show");
+    }
+
+    function closeSymptomDisclaimerOnBackdrop(event) {
+      if (event.target.id === "symptomDisclaimerModal") {
+        closeSymptomDisclaimer();
+      }
     }
 
     function closeSymptomChecker() {
@@ -2992,6 +4077,426 @@
     function closeSymptomCheckerOnBackdrop(event) {
       if (event.target.id === "symptomModal") {
         closeSymptomChecker();
+      }
+    }
+
+    // ==============================
+    // Medicine Reminders JS
+    // ==============================
+
+    function openMedicineReminders() {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        notify("Please login first");
+        showLoginScreen();
+        return;
+      }
+      closeSymptomDisclaimer();
+      closeSymptomChecker();
+      closeHealthRecords();
+      closeBookingModal();
+      document.getElementById("medicineReminderModal").classList.add("show");
+      editingMedicineId = null;
+      toggleMedicineReminderForm(false);
+      loadMedicineReminders();
+    }
+
+    function toggleMedicineReminderForm(show) {
+      const form = document.getElementById("medicineForm");
+      if (form) form.style.display = show ? "block" : "none";
+    }
+
+    let editingMedicineId = null;
+
+    function startEditMedicineReminder(id, medicineName, dosage, frequency, time, startDate, endDate) {
+      editingMedicineId = id;
+      document.getElementById("medName").value = decodeURIComponent(medicineName);
+      document.getElementById("medDosage").value = decodeURIComponent(dosage);
+      document.getElementById("medFrequency").value = decodeURIComponent(frequency);
+      document.getElementById("medTime").value = decodeURIComponent(time);
+      document.getElementById("medStartDate").value = startDate;
+      document.getElementById("medEndDate").value = endDate;
+      document.getElementById("medicineFormTitle").textContent = "Edit Medicine Reminder";
+      document.getElementById("medicineSubmitButton").textContent = "Update reminder";
+      toggleMedicineReminderForm(true);
+      document.getElementById("medicineForm").scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    let medicineReminderTimers = new Map();
+
+    function updateMedicineNotificationUI() {
+      const button = document.getElementById("medicineNotificationButton");
+      const status = document.getElementById("medicineNotificationStatus");
+
+      if (!button || !status) return;
+
+      if (!("Notification" in window)) {
+        button.style.display = "none";
+        status.textContent = "This browser does not support phone notifications.";
+        return;
+      }
+
+      if (Notification.permission === "granted") {
+        button.textContent = "Notifications enabled";
+        button.disabled = true;
+        button.style.opacity = "0.7";
+        status.textContent = "Phone notifications are enabled. Alerts can arrive even when this page is closed.";
+      } else if (Notification.permission === "denied") {
+        button.textContent = "Notifications blocked";
+        button.disabled = true;
+        status.textContent = "Notifications are blocked in your browser settings.";
+      }
+    }
+
+    async function enableMedicineNotifications() {
+      if (!("Notification" in window)) {
+        updateMedicineNotificationUI();
+        return;
+      }
+
+      let permission;
+      try {
+        permission = await Notification.requestPermission();
+      } catch (error) {
+        console.warn("Browser notifications are unavailable in this context.", error);
+        const status = document.getElementById("medicineNotificationStatus");
+        if (status) status.textContent = "Browser notifications need HTTPS or localhost. In-app reminders are still active while this page is open.";
+        return;
+      }
+
+      updateMedicineNotificationUI();
+
+      if (permission === "granted") {
+        try {
+          if (!("serviceWorker" in navigator) || !window.isSecureContext) {
+            throw new Error("Phone notifications require HTTPS or localhost.");
+          }
+
+          const registration = await navigator.serviceWorker.register("./sw.js");
+          const keyResponse = await fetch(`${API_URL}/push/public-key`);
+          const keyResult = await keyResponse.json();
+          if (!keyResponse.ok) throw new Error(keyResult.message || "Phone notifications are not configured");
+
+          const subscription = await registration.pushManager.subscribe({
+            userVisibleOnly: true,
+            applicationServerKey: urlBase64ToUint8Array(keyResult.publicKey)
+          });
+          const saveResponse = await fetch(`${API_URL}/push/subscribe`, {
+            method: "POST",
+            headers: getAuthHeaders(),
+            body: JSON.stringify(subscription)
+          });
+          const saveResult = await saveResponse.json();
+          if (!saveResponse.ok) throw new Error(saveResult.message || "Unable to save phone notification settings");
+
+          await loadMedicineReminders();
+          updateMedicineNotificationUI();
+          notify("Phone notifications enabled");
+        } catch (error) {
+          const status = document.getElementById("medicineNotificationStatus");
+          if (status) status.textContent = error.message;
+          notify(error.message);
+        }
+      }
+    }
+
+    function urlBase64ToUint8Array(value) {
+      const padding = "=".repeat((4 - value.length % 4) % 4);
+      const base64 = (value + padding).replace(/-/g, "+").replace(/_/g, "/");
+      return Uint8Array.from(atob(base64), character => character.charCodeAt(0));
+    }
+
+    function clearMedicineReminderTimers() {
+      medicineReminderTimers.forEach((timer) => clearTimeout(timer));
+      medicineReminderTimers.clear();
+    }
+
+    function scheduleMedicineReminder(medicine) {
+      const start = new Date(medicine.startDate);
+      const end = new Date(medicine.endDate);
+      end.setHours(23, 59, 59, 999);
+      const now = new Date();
+
+      if (now > end) return;
+
+      const [hours, minutes] = String(medicine.time || "").split(":").map(Number);
+      if (!Number.isInteger(hours) || !Number.isInteger(minutes)) return;
+
+      const reminderDate = new Date(Math.max(now.getTime(), start.getTime()));
+      reminderDate.setHours(hours, minutes, 0, 0);
+
+      if (reminderDate <= now) {
+        reminderDate.setDate(reminderDate.getDate() + 1);
+      }
+
+      if (reminderDate > end) return;
+
+      const timer = setTimeout(() => {
+        showMedicineAlert(medicine);
+        scheduleMedicineReminder(medicine);
+      }, Math.min(reminderDate.getTime() - now.getTime(), 2147483647));
+
+      medicineReminderTimers.set(String(medicine._id), timer);
+    }
+
+    function scheduleMedicineReminders(medicines) {
+      clearMedicineReminderTimers();
+      medicines.forEach(scheduleMedicineReminder);
+    }
+
+    function showMedicineAlert(medicine) {
+      const message = `Time to take ${medicine.medicineName} (${medicine.dosage})`;
+      const alert = document.getElementById("medicineAlert");
+
+      if (alert) {
+        alert.textContent = `💊 ${message}`;
+        alert.style.display = "block";
+      }
+
+      notify(message);
+
+      if ("Notification" in window && Notification.permission === "granted") {
+        new Notification("Medicine reminder", {
+          body: message,
+          tag: `medicine-${medicine._id}`
+        });
+      }
+    }
+
+    function closeMedicineReminders() {
+      document.getElementById("medicineReminderModal").classList.remove("show");
+    }
+
+    function closeMedicineRemindersOnBackdrop(event) {
+      if (event.target.id === "medicineReminderModal") {
+        closeMedicineReminders();
+      }
+    }
+
+    async function loadMedicineReminders() {
+      const container = document.getElementById("medicineListContainer");
+      if (!container || !currentUser) return;
+
+      const patientId = currentUser._id || currentUser.id;
+      container.innerHTML = '<p style="color:var(--muted);font-size:13px;">Loading reminders...</p>';
+
+      try {
+        const response = await fetch(`${API_URL}/medicines/patient/${patientId}`, {
+          headers: getAuthHeaders()
+        });
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.message || "Failed to load medicine reminders");
+        }
+
+        if (!Array.isArray(data) || data.length === 0) {
+            scheduleMedicineReminders([]);
+          container.innerHTML = '<p style="color:var(--muted);font-size:13px;">No medicine reminders added yet. Select “Add reminder” to create one.</p>';
+          return;
+        }
+
+          scheduleMedicineReminders(data);
+
+        container.innerHTML = data.map((med) => `
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;border:1px solid var(--line);border-radius:10px;margin-bottom:8px;background:white;">
+            <div>
+              <strong style="display:block;font-size:14px;color:var(--ink);">${escapeHtml(med.medicineName)} - ${escapeHtml(med.dosage)}</strong>
+              <div style="font-size:12px;color:var(--muted);margin-top:2px;">
+                ⏰ ${escapeHtml(med.frequency)} at ${escapeHtml(med.time)}
+              </div>
+              <div style="font-size:11px;color:var(--muted);margin-top:2px;">
+                📅 ${new Date(med.startDate).toLocaleDateString()} to ${new Date(med.endDate).toLocaleDateString()}
+              </div>
+            </div>
+            <div style="display:flex;gap:6px;align-items:center;">
+              <button onclick="startEditMedicineReminder('${med._id}', '${encodeURIComponent(med.medicineName || "")}', '${encodeURIComponent(med.dosage || "")}', '${encodeURIComponent(med.frequency || "")}', '${encodeURIComponent(med.time || "")}', '${new Date(med.startDate).toISOString().slice(0, 10)}', '${new Date(med.endDate).toISOString().slice(0, 10)}')" style="background:var(--green-2);color:var(--green);border:0;padding:6px 10px;border-radius:6px;cursor:pointer;font-weight:700;font-size:12px;">Edit</button>
+              <button onclick="deleteMedicineReminder('${med._id}')" style="background:#fee2e2;color:#991b1b;border:0;padding:6px 10px;border-radius:6px;cursor:pointer;font-weight:700;font-size:12px;">Delete</button>
+            </div>
+          </div>
+        `).join("");
+
+      } catch (error) {
+        console.error("Load medicine error:", error);
+        container.innerHTML = `<p style="color:#c95c4a;font-size:13px;">${escapeHtml(error.message)}</p>`;
+      }
+    }
+
+    async function submitMedicineReminder(event) {
+      event.preventDefault();
+      if (!currentUser) {
+        notify("Please login first");
+        return;
+      }
+
+      const medicineName = document.getElementById("medName").value.trim();
+      const dosage = document.getElementById("medDosage").value.trim();
+      const frequency = document.getElementById("medFrequency").value;
+      const time = document.getElementById("medTime").value;
+      const startDate = document.getElementById("medStartDate").value;
+      const endDate = document.getElementById("medEndDate").value;
+
+      if (endDate < startDate) {
+        notify("End date must be on or after the start date");
+        return;
+      }
+
+      try {
+        const response = await fetch(
+          editingMedicineId ? `${API_URL}/medicines/${editingMedicineId}` : `${API_URL}/medicines`,
+          {
+          method: editingMedicineId ? "PUT" : "POST",
+          headers: getAuthHeaders(),
+          body: JSON.stringify({ medicineName, dosage, frequency, time, startDate, endDate })
+          }
+        );
+
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.message || "Failed to add medicine reminder");
+
+        notify(editingMedicineId ? "Medicine reminder updated successfully!" : "Medicine reminder added successfully!");
+        editingMedicineId = null;
+        document.getElementById("medicineForm").reset();
+        document.getElementById("medicineFormTitle").textContent = "Add New Medicine Reminder";
+        document.getElementById("medicineSubmitButton").textContent = "Save reminder";
+        toggleMedicineReminderForm(false);
+        await loadMedicineReminders();
+      } catch (error) {
+        console.error(error);
+        notify(error.message);
+      }
+    }
+
+    async function deleteMedicineReminder(id) {
+      if (!confirm("Are you sure you want to delete this reminder?")) return;
+      try {
+        const response = await fetch(`${API_URL}/medicines/${id}`, {
+          method: "DELETE",
+          headers: getAuthHeaders()
+        });
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.message || "Failed to delete reminder");
+        notify("Reminder deleted");
+        await loadMedicineReminders();
+      } catch (error) {
+        console.error(error);
+        notify(error.message);
+      }
+    }
+
+    // ==============================
+    // Health Records JS
+    // ==============================
+
+    function openHealthRecords() {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        notify("Please login first");
+        showLoginScreen();
+        return;
+      }
+      closeSymptomDisclaimer();
+      closeSymptomChecker();
+      closeMedicineReminders();
+      closeBookingModal();
+      document.getElementById("healthRecordsModal").classList.add("show");
+      document.querySelectorAll("#patientNav .nav-item").forEach(item => {
+        item.classList.remove("active");
+      });
+      document.getElementById("patientHealthRecordsNav")?.classList.add("active");
+      loadHealthRecords();
+    }
+
+    function closeHealthRecords() {
+      document.getElementById("healthRecordsModal").classList.remove("show");
+      document.querySelectorAll("#patientNav .nav-item").forEach(item => {
+        item.classList.remove("active");
+      });
+      document.querySelector("#patientNav .nav-item")?.classList.add("active");
+    }
+
+    function closeHealthRecordsOnBackdrop(event) {
+      if (event.target.id === "healthRecordsModal") {
+        closeHealthRecords();
+      }
+    }
+
+    async function loadHealthRecords() {
+      if (!currentUser) return;
+
+      // Render patient profile summary
+      const detailsContainer = document.getElementById("healthRecordPatientDetails");
+      if (detailsContainer) {
+        detailsContainer.innerHTML = `
+          <div><strong>Name:</strong> ${escapeHtml(currentUser.name || "Patient")}</div>
+          <div><strong>Email:</strong> ${escapeHtml(currentUser.email || "N/A")}</div>
+          <div><strong>Phone:</strong> ${escapeHtml(currentUser.phone || "N/A")}</div>
+          <div><strong>Age:</strong> ${escapeHtml(String(currentUser.age || "N/A"))}</div>
+          <div><strong>Gender:</strong> ${escapeHtml(currentUser.gender || "N/A")}</div>
+          <div><strong>Location:</strong> ${escapeHtml(currentUser.location || "N/A")}</div>
+        `;
+      }
+
+      // Load patient appointments history
+      const apptContainer = document.getElementById("healthRecordAppointmentsContainer");
+      if (apptContainer) {
+        apptContainer.innerHTML = '<p style="color:var(--muted);font-size:13px;">Loading consultations...</p>';
+        try {
+          const token = localStorage.getItem("token");
+          const res = await fetch(`${API_URL}/appointments/patient`, {
+            headers: { "Authorization": `Bearer ${token}` }
+          });
+          const result = await res.json();
+          const appointments = result.data || [];
+
+          if (appointments.length === 0) {
+            apptContainer.innerHTML = '<p style="color:var(--muted);font-size:13px;">No past consultations recorded.</p>';
+          } else {
+            apptContainer.innerHTML = appointments.map(item => `
+              <div style="padding:10px 12px;border:1px solid var(--line);border-radius:8px;margin-bottom:8px;background:white;display:flex;justify-content:space-between;align-items:center;">
+                <div>
+                  <strong style="display:block;font-size:13px;color:var(--ink);">Dr. ${escapeHtml(item.doctor?.name || "Doctor")} (${escapeHtml(item.doctor?.specialization || "General")})</strong>
+                  <div style="font-size:12px;color:var(--muted);">Reason: ${escapeHtml(item.reason || "N/A")}</div>
+                  <div style="font-size:11px;color:var(--muted);">Scheduled: ${formatAppointmentDate(item.scheduledAt)}</div>
+                </div>
+                ${appointmentStatusHtml(item.status)}
+              </div>
+            `).join("");
+          }
+        } catch (err) {
+          apptContainer.innerHTML = `<p style="color:#c95c4a;font-size:13px;">${escapeHtml(err.message)}</p>`;
+        }
+      }
+
+      // Load symptom check history
+      const symptomContainer = document.getElementById("healthRecordSymptomsContainer");
+      if (symptomContainer) {
+        symptomContainer.innerHTML = '<p style="color:var(--muted);font-size:13px;">Loading symptom history...</p>';
+        try {
+          const token = localStorage.getItem("token");
+          const res = await fetch(`${API_URL}/symptoms/history`, {
+            headers: { "Authorization": `Bearer ${token}` }
+          });
+          const result = await res.json();
+          const symptoms = result.data || [];
+
+          if (symptoms.length === 0) {
+            symptomContainer.innerHTML = '<p style="color:var(--muted);font-size:13px;">No symptom checks recorded yet.</p>';
+          } else {
+            symptomContainer.innerHTML = symptoms.map(item => `
+              <div style="padding:10px 12px;border:1px solid var(--line);border-radius:8px;margin-bottom:8px;background:white;">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+                  <strong style="font-size:13px;color:var(--ink);">${escapeHtml(item.symptoms?.join(", "))}</strong>
+                  <span class="urgency urgency-${String(item.result?.urgency || "moderate").toLowerCase()}">${escapeHtml(item.result?.urgency || "Moderate")}</span>
+                </div>
+                <div style="font-size:12px;color:var(--muted);">Recommendation: ${escapeHtml(item.result?.recommendation || "Consult a doctor")}</div>
+                <div style="font-size:11px;color:var(--muted);margin-top:2px;">Checked: ${new Date(item.createdAt).toLocaleString()}</div>
+              </div>
+            `).join("");
+          }
+        } catch (err) {
+          symptomContainer.innerHTML = `<p style="color:#c95c4a;font-size:13px;">${escapeHtml(err.message)}</p>`;
+        }
       }
     }
 

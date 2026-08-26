@@ -12,3 +12,12 @@ export const getDoctorNotifications =
 
     return response.data;
   };
+
+// Mark a notification as read (PRD 5.8)
+export const markNotificationAsRead =
+  async (notificationId) => {
+    const response = await axios.patch(
+      `${API_URL}/${notificationId}/read`
+    );
+    return response.data;
+  };
