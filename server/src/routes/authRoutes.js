@@ -37,6 +37,12 @@ router.get(
   authController.getProfile
 );
 
+router.put(
+  "/profile",
+  protect,
+  authController.updateProfile
+);
+
 
 // =====================================================
 // RESET PASSWORD

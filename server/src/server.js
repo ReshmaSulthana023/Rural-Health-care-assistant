@@ -14,6 +14,9 @@ const patientRoutes = require("./routes/patientRoutes");
 const availabilityRoutes = require("./routes/availabilityRoutes");
 const appointmentRoutes = require("./routes/appointmentRoutes");
 const notificationRoutes = require("./routes/notificationRoutes");
+const pushRoutes = require("./routes/pushRoutes");
+const paymentRoutes = require("./routes/paymentRoutes");
+const { startMedicineReminderScheduler } = require("./services/medicineReminderService");
 
 // Create Express app
 const app = express();
@@ -56,6 +59,8 @@ app.use("/api/appointments", appointmentRoutes);
 
 // Notifications
 app.use("/api/notifications", notificationRoutes);
+app.use("/api/push", pushRoutes);
+app.use("/api/payments", paymentRoutes);
 
 // Medicines
 const medicineRoutes = require("./routes/medicineRoutes");
@@ -79,4 +84,5 @@ const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
+  startMedicineReminderScheduler();
 });

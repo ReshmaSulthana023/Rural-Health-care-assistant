@@ -31,6 +31,10 @@ const medicineSchema = new mongoose.Schema(
       type: Date,
       required: true,
     },
+    lastReminderSentOn: {
+      type: String,
+      default: "",
+    },
   },
   {
     timestamps: true,

@@ -1,4 +1,5 @@
 const { GoogleGenAI } = require("@google/genai");
+const { symptomRules } = require("../data/symptomRules");
 
 console.log(
   "Gemini API key loaded:",
@@ -9,7 +10,34 @@ const ai = new GoogleGenAI({
   apiKey: process.env.GEMINI_API_KEY,
 });
 
+const getRuleBasedResult = (symptoms, severity) => {
+  const matchedConditions = symptomRules
+    .filter((rule) => rule.symptoms.every((symptom) => symptoms.includes(symptom)))
+    .flatMap((rule) => rule.possibleConditions);
+
+  const possibleConditions = [...new Set(matchedConditions)];
+  const urgency = severity === "Severe"
+    ? "High"
+    : severity === "Moderate"
+      ? "Moderate"
+      : "Low";
+
+  return {
+    possibleConditions: possibleConditions.length
+      ? possibleConditions
+      : ["A general health condition"],
+    urgency,
+    recommendation: severity === "Severe"
+      ? "Please consult a qualified healthcare professional promptly."
+      : "Monitor your symptoms and consult a qualified healthcare professional if they continue or worsen.",
+  };
+};
+
 const analyzeSymptoms = async (symptoms, duration, severity) => {
+  if (!process.env.GEMINI_API_KEY) {
+    return getRuleBasedResult(symptoms, severity);
+  }
+
   try {
     const prompt = `
 You are a healthcare symptom screening assistant.
@@ -51,7 +79,7 @@ Important:
     console.log("Sending request to Gemini...");
 
     const response = await ai.models.generateContent({
-      model: "gemini-3.5-flash-lite",
+      model: "gemini-2.5-flash",
       contents: prompt,
       config: {
         responseMimeType: "application/json",
@@ -83,6 +111,12 @@ Important:
       throw new Error("Invalid response format from Gemini");
     }
 
+    const allowedUrgencies = ["Low", "Moderate", "High", "Emergency"];
+
+    if (!allowedUrgencies.includes(result.urgency)) {
+      return getRuleBasedResult(symptoms, severity);
+    }
+
     return result;
 
   } catch (error) {
@@ -110,8 +144,8 @@ Important:
     console.log("========================================");
     console.log("\n");
 
-    // Keep the real error visible while debugging
-    throw error;
+    console.warn("Gemini unavailable; using local symptom rules.");
+    return getRuleBasedResult(symptoms, severity);
   }
 };
 

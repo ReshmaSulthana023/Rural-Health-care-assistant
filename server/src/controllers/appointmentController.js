@@ -173,7 +173,18 @@ const createAppointment = bookAppointment;
 
 const getAllAppointments = async (req, res) => {
   try {
-    const appointments = await Appointment.find()
+    if (!req.user) {
+      return res.status(401).json({
+        success: false,
+        message: "Authentication required",
+      });
+    }
+
+    const filter = req.user.role === "doctor"
+      ? { doctor: req.user.userId }
+      : { patient: req.user.userId };
+
+    const appointments = await Appointment.find(filter)
       .populate(
         "doctor",
         "name email phone specialization qualification yearsOfExperience hospitalClinicName location consultationFee preferredLanguage"
@@ -209,11 +220,14 @@ const getAllAppointments = async (req, res) => {
 
 const getPatientAppointments = async (req, res) => {
   try {
-    // Prefer logged-in user's ID for security
-    const patientId =
-      req.user && req.user.role === "patient"
-        ? req.user.userId
-        : req.params.patientId;
+    if (!req.user || req.user.role !== "patient") {
+      return res.status(403).json({
+        success: false,
+        message: "Only patients can view patient appointments",
+      });
+    }
+
+    const patientId = req.user.userId;
 
     const appointments = await Appointment.find({
       patient: patientId,
@@ -249,11 +263,14 @@ const getPatientAppointments = async (req, res) => {
 
 const getDoctorAppointments = async (req, res) => {
   try {
-    // Prefer logged-in doctor's ID
-    const doctorId =
-      req.user && req.user.role === "doctor"
-        ? req.user.userId
-        : req.params.doctorId;
+    if (!req.user || req.user.role !== "doctor") {
+      return res.status(403).json({
+        success: false,
+        message: "Only doctors can view doctor appointments",
+      });
+    }
+
+    const doctorId = req.user.userId;
 
     const appointments = await Appointment.find({
       doctor: doctorId,
@@ -264,7 +281,7 @@ const getDoctorAppointments = async (req, res) => {
       )
       .populate(
         "doctor",
-        "name email phone specialization qualification hospitalClinicName"
+        "name email phone specialization qualification hospitalClinicName consultationFee"
       )
       .sort({
         scheduledAt: 1,

@@ -339,6 +339,38 @@ const getProfile = async (req, res) => {
     });
   }
 };
+
+const updateProfile = async (req, res) => {
+  try {
+    const allowedFields = [
+      "name", "phone", "age", "gender", "location", "preferredLanguage",
+      "specialization", "qualification", "yearsOfExperience",
+      "hospitalClinicName", "consultationFee"
+    ];
+    const updates = {};
+
+    allowedFields.forEach((field) => {
+      if (req.body[field] !== undefined) updates[field] = req.body[field];
+    });
+
+    if (!updates.name || !String(updates.name).trim()) {
+      return res.status(400).json({ success: false, message: "Name is required" });
+    }
+
+    const user = await User.findByIdAndUpdate(
+      req.user.userId,
+      { $set: updates },
+      { new: true, runValidators: true }
+    ).select("-password");
+
+    if (!user) return res.status(404).json({ success: false, message: "User not found" });
+
+    return res.status(200).json({ success: true, message: "Profile updated successfully", data: user });
+  } catch (error) {
+    console.error("Update profile error:", error);
+    return res.status(400).json({ success: false, message: error.message });
+  }
+};
 // =====================================================
 // RESET PASSWORD
 // =====================================================
@@ -424,5 +456,6 @@ module.exports = {
   registerUser,
   loginUser,
   getProfile,
+  updateProfile,
   resetPassword,
 };

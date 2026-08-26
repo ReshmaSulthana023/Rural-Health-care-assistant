@@ -3,8 +3,11 @@ const Medicine = require("../models/medicine");
 // Get all medicines for a specific patient
 exports.getMedicinesByPatient = async (req, res) => {
   try {
-    const { patientId } = req.params;
-    const medicines = await Medicine.find({ patientId }).sort({ createdAt: -1 });
+    if (!req.user || req.user.role !== "patient") {
+      return res.status(403).json({ message: "Only patients can view medicine reminders" });
+    }
+
+    const medicines = await Medicine.find({ patientId: req.user.userId }).sort({ createdAt: -1 });
     res.status(200).json(medicines);
   } catch (error) {
     console.error("Error fetching medicines:", error);
@@ -15,10 +18,14 @@ exports.getMedicinesByPatient = async (req, res) => {
 // Add a new medicine
 exports.addMedicine = async (req, res) => {
   try {
-    const { patientId, medicineName, dosage, frequency, time, startDate, endDate } = req.body;
+    if (!req.user || req.user.role !== "patient") {
+      return res.status(403).json({ message: "Only patients can create medicine reminders" });
+    }
+
+    const { medicineName, dosage, frequency, time, startDate, endDate } = req.body;
 
     const newMedicine = new Medicine({
-      patientId,
+      patientId: req.user.userId,
       medicineName,
       dosage,
       frequency,
@@ -39,9 +46,13 @@ exports.addMedicine = async (req, res) => {
 exports.updateMedicine = async (req, res) => {
   try {
     const { id } = req.params;
-    const updates = req.body;
+    const { patientId, ...updates } = req.body;
 
-    const updatedMedicine = await Medicine.findByIdAndUpdate(id, updates, { new: true });
+    const updatedMedicine = await Medicine.findOneAndUpdate(
+      { _id: id, patientId: req.user.userId },
+      { $set: updates },
+      { new: true, runValidators: true }
+    );
 
     if (!updatedMedicine) {
       return res.status(404).json({ message: "Medicine not found" });
@@ -58,7 +69,10 @@ exports.updateMedicine = async (req, res) => {
 exports.deleteMedicine = async (req, res) => {
   try {
     const { id } = req.params;
-    const deletedMedicine = await Medicine.findByIdAndDelete(id);
+    const deletedMedicine = await Medicine.findOneAndDelete({
+      _id: id,
+      patientId: req.user.userId,
+    });
 
     if (!deletedMedicine) {
       return res.status(404).json({ message: "Medicine not found" });
